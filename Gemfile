@@ -61,6 +61,9 @@ gem 'devise'
 # maps autocomplete
 gem 'gmaps-autocomplete-rails'
 
+# pagination
+gem 'kaminari'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
