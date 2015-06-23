@@ -1,0 +1,11 @@
+<%= simple_form_for([user, UserPicture.new], html: { multipart: true }) do |f| %>
+  <%= f.error_notification %>
+
+  <p>
+    <%= f.label :file %>
+    <%= f.file_field :file %>
+  </p>
+
+  <%= f.button :submit, :value => "add picture" %>
+  <br><br>
+<% end %>

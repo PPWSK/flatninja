@@ -3,8 +3,10 @@ Rails.application.routes.draw do
   devise_for :accounts, :controllers => { :registrations => "registrations" }
 
   resources :buildings, only: [ :new, :index, :show ]
+
   resources :users, except: [ :index, :destroy ] do
     resources :buildings, only: [ :new, :create, :edit, :update, :destroy ]
+    resources :user_pictures, only: [ :new, :create, :destroy ]
   end
 
   root to: 'buildings#index'

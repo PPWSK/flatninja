@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   before_action :find_user, only: [:show, :edit, :update]
+
+
   def new
     @user = User.new
   end
@@ -8,7 +10,8 @@ class UsersController < ApplicationController
       @user = User.create(user_params)
       @user.account = current_account
       if @user.save
-        redirect_to buildings_path
+        flash[:notice] = "Now add some pictures!"
+        redirect_to edit_user_path(@user)
       else
         render :new
       end
@@ -32,7 +35,7 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :birth_date, :gender, :phone_number)
+    params.require(:user).permit(:first_name, :last_name, :birth_date, :gender, :phone_number, :user_picture)
   end
 
   def find_user
