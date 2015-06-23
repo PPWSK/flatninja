@@ -8,7 +8,7 @@ class UsersController < ApplicationController
       @user = User.create(user_params)
       @user.account = current_account
       if @user.save
-        redirect_to user_path(@user)
+        redirect_to buildings_path
       else
         render :new
       end
@@ -22,7 +22,7 @@ class UsersController < ApplicationController
 
   def update
     if @user.update!(user_params)
-      redirect_to user_path(@user)
+      redirect_to buildings_path
     else
       render :edit
     end

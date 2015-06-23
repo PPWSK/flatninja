@@ -12,16 +12,14 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
+//= require bootstrap-sprockets
 
 //= require underscore
 //= require gmaps/google
+
 //= require jquery-ui
 //= require gmaps-auto-complete
 
-//= require_tree .
+//= require gmaps
 
-$(document).ready(function() {
-  GmapsAutoComplete.init();
-  GmapsAutoComplete.autoCompleteInit();
-});
+//= require_tree .

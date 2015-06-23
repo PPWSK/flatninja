@@ -2,7 +2,10 @@ Rails.application.routes.draw do
 
   devise_for :accounts, :controllers => { :registrations => "registrations" }
 
-  resources :buildings
+  resources :buildings, only: [ :new, :index, :show ]
+  resources :users, except: [ :index, :destroy ] do
+    resources :buildings, only: [ :new, :create, :edit, :update, :destroy ]
+  end
 
   root to: 'buildings#index'
   # The priority is based upon order of creation: first created -> highest priority.
