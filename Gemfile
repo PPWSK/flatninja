@@ -42,6 +42,8 @@ gem 'puma',           group: :production
 gem 'bootstrap-sass'
 gem 'font-awesome-sass'
 gem 'simple_form'
+# need to install this for simple_form country select
+# gem 'country_select'
 
 # security related to buckets
 gem 'figaro'

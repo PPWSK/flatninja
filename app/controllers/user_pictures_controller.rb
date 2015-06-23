@@ -10,7 +10,9 @@ class UserPicturesController < ApplicationController
   end
 
   def create
+
     @user_picture = @user.user_pictures.build(picture_params)
+
     if @user_picture.save
       redirect_to edit_user_path(
         params[:user_id])
