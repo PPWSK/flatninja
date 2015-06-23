@@ -9,52 +9,71 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/">
-        <%= image_tag "logo.jpg" %>
+        <%= image_tag "fn_name_white.png" %>
       </a>
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
-        <% if user_signed_in? %>
+        <!-- TODO: replace with authorization -->
+        <% if account_signed_in? && !current_account.user.nil? %>
+
+          <!-- messages -->
           <li>
             <%= link_to "#" do %>
               <i class="fa fa-envelope-o"></i> <%= t(".messages", default: "Messages") %>
             <% end %>
           </li>
+
+          <!-- dropdown -->
           <li class="dropdown">
+
             <%= link_to "#", {class: "dropdown-toggle", "data-toggle" => "dropdown", "role" => "button", "aria-expanded" => "false"} do %>
-              <%= image_tag "http://placehold.it/30x30", class: "img-avatar" %>
+
+              <!-- replace with multiple pictures
+               if current_account.user.picture.present? %>
+                 image_tag current_account.user.picture.url(:thumb), class: "img-avatar" %>
+               end %> -->
+
               Profile <span class="caret"></span>
             <% end %>
             <ul class="dropdown-menu" role="menu">
+
+              <!-- profile -->
               <li>
-                <%= link_to "#" do %>
-                  <i class="fa fa-user"></i> <%= t ".profile", default: "Profile" %>
+                <%= link_to edit_user_path(current_account.user.id) do %>
+                  <i class="fa fa-user"></i> <%= t ".profile", default: "My Profile" %>
                 <% end %>
               </li>
+
+              <!-- flat -->
               <li>
                 <%= link_to "#" do %>
-                  <i class="fa fa-home"></i>  <%= t ".profile", default: "Flat" %>
+                  <i class="fa fa-home"></i>  <%= t ".profile", default: "My Rooms" %>
                 <% end %>
               </li>
+
+              <!-- sign out -->
               <li>
-                <%= link_to destroy_user_session_path, method: :delete do %>
+                <%= link_to destroy_account_session_path, method: :delete do %>
                   <i class="fa fa-sign-out"></i>  <%= t ".sign_out", default: "Sign out" %>
                 <% end %>
               </li>
             </ul>
           </li>
         <% else %>
+
+          <!-- if not signed in -->
           <li>
-            <%= link_to t(".sign_up", default: "Sign up"), new_user_registration_path %>
+            <%= link_to t(".sign_up", default: "Sign up"), new_account_registration_path %>
           </li>
           <li>
-            <%= link_to t(".sign_in", default: "Sign in"), new_user_session_path %>
+            <%= link_to t(".sign_in", default: "Sign in"), new_account_session_path %>
           </li>
         <% end %>
         <li>
-          <%= link_to t(".top_call_to_action", default: "Rent your flat"), "#", class: "btn" %>
+          <%= link_to t(".top_call_to_action", default: "Rent your flat"), ((account_signed_in? && !current_account.user.nil?) ? new_user_building_path(current_account.user.id) : new_account_session_path), class: "btn" %>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->
