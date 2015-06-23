@@ -1,8 +1,8 @@
 class UserPicturesController < ApplicationController
   before_action :find_user, only: [:create, :new, :destroy]
+  before_action :find_user_pic, only: [:show, :destroy]
 
   def show
-    @user_picture = UserPicture.find(params[:id])
   end
 
   def new
@@ -13,20 +13,19 @@ class UserPicturesController < ApplicationController
 
     @user_picture = @user.user_pictures.build(picture_params)
 
-    if @user_picture.save
-      redirect_to edit_user_path(
-        params[:user_id])
+    if @user_picture.save!
+      redirect_to edit_user_path(@user)
     else
       render :new
     end
   end
 
   def destroy
-    @user_picture = UserPicture.find(params[:id])
-    if @user_picture.destroy
-      redirect_to edit_user_path(
-        params[:user_id])
+
+    if @user_picture.destroy!
+      redirect_to edit_user_path(@user)
     end
+
   end
 
   private
@@ -36,6 +35,11 @@ class UserPicturesController < ApplicationController
   end
 
   def find_user
-     @user = User.find(params[:user_id])
+    @user = User.find(params[:user_id])
   end
+
+  def find_user_pic
+    @user_picture = UserPicture.find(params[:id])
+  end
+
 end
