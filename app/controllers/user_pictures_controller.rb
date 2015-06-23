@@ -1,0 +1,2 @@
+class UserPicturesController < ApplicationController
+end
