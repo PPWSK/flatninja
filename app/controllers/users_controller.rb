@@ -9,7 +9,7 @@ class UsersController < ApplicationController
   def create
       @user = User.create(user_params)
       @user.account = current_account
-      if @user.save
+      if @user.save!
         flash[:notice] = "Now add some pictures!"
         redirect_to edit_user_path(@user)
       else

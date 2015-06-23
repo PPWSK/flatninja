@@ -1,0 +1,10 @@
+<%= simple_form_for(@user, html: { class: 'form-horizontal' }) do |f| %>
+
+  <%= f.input :first_name, label: "first name", required: true %>
+  <%= f.input :last_name, label: 'last name', required: true %>
+  <%= f.input :birth_date, label: 'birthdate', required: true %>
+  <%= f.input :gender, collection: ["female", "male"], label: 'gender', required: true %>
+  <%= f.input :phone_number, label: 'phone number', required: true %>
+  <%= f.submit "submit" %>
+
+<% end %>

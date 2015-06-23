@@ -3,7 +3,7 @@
 
   <p>
     <%= f.label :file %>
-    <%= f.file_field :file %>
+    <%= f.file_field :file, required: true %>
   </p>
 
   <%= f.button :submit, :value => "add picture" %>
