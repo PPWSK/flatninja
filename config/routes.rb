@@ -1,25 +1,10 @@
 Rails.application.routes.draw do
 
-  get 'buildings/index'
+  devise_for :accounts, :controllers => { :registrations => "registrations" }
 
-  get 'buildings/show'
+  resources :buildings
 
-  get 'buildings/new'
-
-  get 'buildings/create'
-
-  get 'buildings/edit'
-
-  get 'buildings/update'
-
-  get 'buildings/delete'
-
-  get 'users/new'
-
-  get 'users/edit'
-
-  devise_for :accounts
-  root to: 'home#index'
+  root to: 'buildings#index'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

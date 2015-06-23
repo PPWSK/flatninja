@@ -1,4 +1,6 @@
 class BuildingsController < ApplicationController
+  skip_before_action :authenticate_account!, only: [ :show, :index ]
+
   def index
   end
 
