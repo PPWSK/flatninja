@@ -1,5 +1,19 @@
 Rails.application.routes.draw do
 
+  get 'buildings/index'
+
+  get 'buildings/show'
+
+  get 'buildings/new'
+
+  get 'buildings/create'
+
+  get 'buildings/edit'
+
+  get 'buildings/update'
+
+  get 'buildings/delete'
+
   get 'users/new'
 
   get 'users/edit'
