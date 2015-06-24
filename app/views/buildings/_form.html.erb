@@ -2,7 +2,7 @@
 
   <!-- optional name of building -->
 
-  <%= f.input :name, label: "optional building name", required: false %>
+  <%= f.input :name, label: "optional building name", input_html: { id: 'optional_name' }, required: false %>
 
   <!-- important information -->
 
@@ -13,7 +13,7 @@
   <!-- address -->
 
   <div class="form-group">
-    <%= f.input :location, :input_html =>{:id => 'gmaps-input-address'}, placeholder: 'Start typing a place name...', class: 'form-control' %>
+    <%= f.input :location, input_html: { id: 'gmaps-input-address'}, placeholder: 'Start typing a place name...', class: 'form-control' %>
 
     <!-- id must be this ? user_input_autocomplete_address -->
 
@@ -38,4 +38,25 @@
 
   <%= f.submit "submit", value: 'done' %>
 
+<% end %>
+
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(function(){
+
+    var user_touched_name = false;
+
+    $('*').not('#optional_name').on('input', function(){
+      if ($('#optional_name').val().length == 0 || user_touched_name == false){
+        $('#optional_name').val($('#gmaps-input-address').val());
+      }
+    });
+
+    $('#optional_name').bind('keydown', function(){
+      user_touched_name = true;
+    });
+
+    });
+  <% end %>
 <% end %>
