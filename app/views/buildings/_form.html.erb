@@ -7,13 +7,16 @@
   <!-- important information -->
 
   <%= f.input :building_type, collection: ["appartment","house"], label: 'building type', required: true %>
-  <%= f.input :number_of_rooms, label: 'How many sleeping rooms does the building have?', required: true %>
-  <%= f.input :number_of_roommates, label: 'How many roommates are living here at the moment?', required: true %>
+  <%= f.input :number_of_rooms, label: 'How many sleeping rooms does the building have?', required: true, input_html: { min: '0', step: 'any' } %>
+  <%= f.input :number_of_roommates, label: 'How many roommates are living here at the moment?', required: true, input_html: { min: '0', step: 'any' } %>
 
   <!-- address -->
 
   <div class="form-group">
-    <%= f.input :location, placeholder: 'Start typing a place name...', class: "form-control" %>
+    <%= f.input :location, :input_html =>{:id => 'gmaps-input-address'}, placeholder: 'Start typing a place name...', class: 'form-control' %>
+
+    <!-- id must be this ? user_input_autocomplete_address -->
+
     <div id='gmaps-error'></div>
     <div id='gmaps-canvas'></div>
   </div>

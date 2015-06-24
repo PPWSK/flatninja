@@ -48,8 +48,8 @@ function update_map( geometry ) {
 
 // fill in the UI elements with new position data
 function update_ui( address, latLng ) {
-  $('#accommodation_location').autocomplete("close");
-  $('#accommodation_location').val(address);
+  $('#gmaps-input-address').autocomplete("close");
+  $('#gmaps-input-address').val(address);
   //$('#gmaps-output-latitude').html(latLng.lat());
   //$('#gmaps-output-longitude').html(latLng.lng());
 }
@@ -108,7 +108,7 @@ function geocode_lookup( type, value, update ) {
 
 // initialise the jqueryUI autocomplete element
 function autocomplete_init() {
-  $("#accommodation_location").autocomplete({
+  $("#gmaps-input-address").autocomplete({
 
     // source is the list of input options shown in the autocomplete dropdown.
     // see documentation: http://jqueryui.com/demos/autocomplete/
@@ -136,15 +136,15 @@ function autocomplete_init() {
   });
 
   // triggered when user presses a key in the address box
-  $("#accommodation_location").bind('keydown', function(event) {
+  $("#gmaps-input-address").bind('keydown', function(event) {
     if(event.keyCode == 13) {
-      geocode_lookup( 'address', $('#accommodation_location').val(), true );
+      geocode_lookup( 'address', $('#gmaps-input-address').val(), true );
 
       // ensures dropdown disappears when enter is pressed
-      $('#accommodation_location').autocomplete("disable")
+      $('#gmaps-input-address').autocomplete("disable")
     } else {
       // re-enable if previously disabled above
-      $('#accommodation_location').autocomplete("enable")
+      $('#gmaps-input-address').autocomplete("enable")
     }
   });
 }; // autocomplete_init
