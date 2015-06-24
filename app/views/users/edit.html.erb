@@ -36,3 +36,26 @@
     </div>
   </div>
 </div>
+
+<!-- JQUERY SECTION -->
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(
+    function(){
+        $('input:file').change(
+            function(){
+                if ($(this).val()) {
+                    $('input:submit').attr('disabled',false);
+                    // or, as has been pointed out elsewhere:
+                    // $('input:submit').removeAttr('disabled');
+                } else {
+                    $('input:submit').attr('disabled',true);
+                }
+            }
+            );
+    });
+  <% end %>
+<% end %>
+
+
