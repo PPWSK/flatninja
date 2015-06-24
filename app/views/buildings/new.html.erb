@@ -1,2 +1,131 @@
-<h1>Buildings#new</h1>
-<p>Find me in app/views/buildings/new.html.erb</p>
+
+
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+    <div class="row">
+
+      <div class="col-sm-1"></div>
+      <div class="col-sm-4" name="building">
+        <%= render 'form' %>
+      </div>
+      <div class="col-sm-2"></div>
+      <div class="col-sm-4" name="rooms">
+
+        <div class="row">
+          <div class="col-sm-12" id="room1">
+            room1
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12" id="room2">
+            room2
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12" id="room3">
+            room3
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12" id="room4">
+            room4
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12" id="room5">
+            room5
+          </div>
+        </div>
+
+      </div>
+      <div class="col-sm-1"></div>
+    </div>
+  </div>
+  <div class="col-sm-2"></div>
+</div>
+
+<!-- JQUERY SECTION -->
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(function(){
+
+        var spare_rooms = 0;
+        var remember_rooms = 0;
+
+        $('#building_number_of_rooms').change(function(){
+          calculate();
+          add_rooms_html();
+        });
+
+        $('#building_number_of_roommates').change(function(){
+          calculate();
+          add_rooms_html();
+        });
+
+        function calculate(){
+          var n_rooms = $('#building_number_of_rooms').val();
+          var n_roommates = $('#building_number_of_roommates').val();
+          spare_rooms = n_rooms - n_roommates;
+
+        }
+
+        function add_rooms_html(){
+          console.log(spare_rooms);
+
+          switch(spare_rooms) {
+            case 5:
+              $("#room1").css("visibility", "visible");
+              $("#room2").css("visibility", "visible");
+              $("#room3").css("visibility", "visible");
+              $("#room4").css("visibility", "visible");
+              $("#room5").css("visibility", "visible");
+              break;
+            case 4:
+              $("#room1").css("visibility", "visible");
+              $("#room2").css("visibility", "visible");
+              $("#room3").css("visibility", "visible");
+              $("#room4").css("visibility", "visible");
+              $("#room5").css("visibility", "hidden");
+              break;
+            case 3:
+              $("#room1").css("visibility", "visible");
+              $("#room2").css("visibility", "visible");
+              $("#room3").css("visibility", "visible");
+              $("#room4").css("visibility", "hidden");
+              $("#room5").css("visibility", "hidden");
+              break;
+            case 2:
+              $("#room1").css("visibility", "visible");
+              $("#room2").css("visibility", "visible");
+              $("#room3").css("visibility", "hidden");
+              $("#room4").css("visibility", "hidden");
+              $("#room5").css("visibility", "hidden");
+              break;
+            case 1:
+              $("#room1").css("visibility", "visible");
+              $("#room2").css("visibility", "hidden");
+              $("#room3").css("visibility", "hidden");
+              $("#room4").css("visibility", "hidden");
+              $("#room5").css("visibility", "hidden");
+              break;
+            case 0:
+              $("#room1").css("visibility", "hidden");
+              $("#room2").css("visibility", "hidden");
+              $("#room3").css("visibility", "hidden");
+              $("#room4").css("visibility", "hidden");
+              $("#room5").css("visibility", "hidden");
+              break;
+            default:
+              console.log("let's start with 5 already");
+          }
+        }
+
+    });
+  <% end %>
+<% end %>

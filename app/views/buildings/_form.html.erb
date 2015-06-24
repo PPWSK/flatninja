@@ -1,0 +1,38 @@
+<%= simple_form_for([@user, @building], html: { class: 'form-horizontal' }, html: { novalidate: true, role: "form" }) do |f| %>
+
+  <!-- optional name of building -->
+
+  <%= f.input :name, label: "optional building name", required: false %>
+
+  <!-- important information -->
+
+  <%= f.input :building_type, collection: ["appartment","house"], label: 'building type', required: true %>
+  <%= f.input :number_of_rooms, label: 'How many sleeping rooms does the building have?', required: true %>
+  <%= f.input :number_of_roommates, label: 'How many roommates are living here at the moment?', required: true %>
+
+  <!-- address -->
+
+  <div class="form-group">
+    <%= f.input :location, placeholder: 'Start typing a place name...', class: "form-control" %>
+    <div id='gmaps-error'></div>
+    <div id='gmaps-canvas'></div>
+  </div>
+
+  <!-- optional information -->
+  <%= f.input :kitchen, label: 'How many kitchens ?', required: false %>
+  <%= f.input :bathroom, label: 'How many bathrooms ?', required: false %>
+  <%= f.input :garden, inline_label: 'Has a garden ?', required: false %>
+  <%= f.input :balcony, inline_label: 'Has a balcony ?', required: false %>
+  <%= f.input :garage, inline_label: 'Has a parking spot ?', required: false %>
+  <%= f.input :bike_storage, inline_label: 'Has a bike storage ?', required: false %>
+  <%= f.input :pets, inline_label: 'Has or allows pets ?', required: false %>
+  <!-- todo: seperate allow and has pets -->
+  <!-- todo: parking spot linked to room, not building -->
+  <%= f.input :cleaning, inline_label: 'Has cleaning help ?', required: false %>
+
+  <!-- todo: add pictures to building -->
+  <!-- todo: confirm so many rooms available?  -->
+
+  <%= f.submit "submit", value: 'done' %>
+
+<% end %>
