@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="/">
-        <%= image_tag "fn_name_white.png" %>
+        <%= image_tag "fn_logo_white.png", id: 'navbar-brand-firstimage' %><%= image_tag "fn_name_white.png" %>
       </a>
     </div>
 
@@ -17,7 +17,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
         <!-- TODO: replace with authorization -->
-        <% if account_signed_in? && !current_account.user.nil? %>
+        <% if account_signed_in? && current_account.user.present? && current_account.user.valid? %>
 
           <!-- messages -->
           <li>
@@ -31,10 +31,10 @@
 
             <%= link_to "#", {class: "dropdown-toggle", "data-toggle" => "dropdown", "role" => "button", "aria-expanded" => "false"} do %>
 
-              <!-- replace with multiple pictures
-               if current_account.user.picture.present? %>
-                 image_tag current_account.user.picture.url(:thumb), class: "img-avatar" %>
-               end %> -->
+
+              <% if current_account.user.user_pictures.first.present? %>
+                <%= image_tag current_account.user.user_pictures.first.file.url(:thumb), class: "img-avatar" %>
+               <% end %>
 
               Profile <span class="caret"></span>
             <% end %>
@@ -73,7 +73,7 @@
           </li>
         <% end %>
         <li>
-          <%= link_to t(".top_call_to_action", default: "Rent your flat"), ((account_signed_in? && !current_account.user.nil?) ? new_user_building_path(current_account.user.id) : new_account_session_path), class: "btn" %>
+          <%= link_to t(".top_call_to_action", default: "Rent your flat"), ((account_signed_in? && current_account.user.present? && current_account.user.valid?) ? new_user_building_path(current_account.user.id) : new_account_session_path), class: "btn" %>
         </li>
       </ul>
     </div><!-- /.navbar-collapse -->

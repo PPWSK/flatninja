@@ -1,2 +1,6 @@
-<h1>Buildings#index</h1>
-<p>Find me in app/views/buildings/index.html.erb</p>
+<h1>
+  Welcome
+  <% if account_signed_in? && current_account.user.present? && current_account.user.valid? %>
+    <%= current_account.user.first_name %>
+  <% end %>
+</h1>

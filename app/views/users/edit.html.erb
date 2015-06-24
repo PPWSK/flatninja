@@ -1,5 +1,5 @@
 <div>
-  <h1 class="text-center">Edit user account:</h1>
+  <h1 class="text-center">You can edit your profile</h1>
   <div class="container">
 
     <!-- PICTURES SECTION -->
@@ -36,3 +36,26 @@
     </div>
   </div>
 </div>
+
+<!-- JQUERY SECTION -->
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(
+    function(){
+        $('input:file').change(
+            function(){
+                if ($(this).val()) {
+                    $('input:submit').attr('disabled',false);
+                    // or, as has been pointed out elsewhere:
+                    // $('input:submit').removeAttr('disabled');
+                } else {
+                    $('input:submit').attr('disabled',true);
+                }
+            }
+            );
+    });
+  <% end %>
+<% end %>
+
+
