@@ -1,4 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
+  skip_before_action :create_profile_if_nonexistent
   protected
 
   def after_sign_up_path_for(resource)

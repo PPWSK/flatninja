@@ -13,16 +13,17 @@ class UserPicturesController < ApplicationController
 
     @user_picture = @user.user_pictures.build(picture_params)
 
-    if @user_picture.save!
+    if @user_picture.save
       redirect_to edit_user_path(@user)
     else
-      render :new
+      flash[:alert] = "Picture not saved!"
+      redirect_to edit_user_path(@user)
     end
   end
 
   def destroy
 
-    if @user_picture.destroy!
+    if @user_picture.destroy
       redirect_to edit_user_path(@user)
     end
 
