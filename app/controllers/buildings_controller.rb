@@ -5,7 +5,7 @@ class BuildingsController < ApplicationController
   before_action :get_rooms, only: [ :new, :create ]
 
   def index
-
+    @buildings = Building.all
   end
 
   def show
@@ -31,11 +31,9 @@ class BuildingsController < ApplicationController
       @room_array.each_with_index do |room, i|
         i+=1
         how_many_room_fields_filled = 0
-
         rooms_params["room"+i.to_s].each do |x|
-          how_many_room_fields_filled += 1 if (!x[1].length == 0 && !x[1] == "0")
+          how_many_room_fields_filled += 1 if (!(x[1].length == 0) && !(x[1] == "0"))
         end
-
         if how_many_room_fields_filled >= 2
           @room = @building.rooms.build(rooms_params["room"+i.to_s])
           if @room.save
@@ -46,7 +44,7 @@ class BuildingsController < ApplicationController
         end
       end
 
-      flash[:alert] = "room_size:" + @building.rooms.size.to_s + ", created rooms: " + created_rooms.to_s
+      flash[:alert] = "Created " + created_rooms.to_s + " new rooms."
       redirect_to buildings_path
     else
       render :new

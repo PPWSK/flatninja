@@ -1,6 +1,55 @@
-<h1>
-  Welcome
+<div id="container">
+  <div id="row">
+    <div id="col-sm-8 col-offset-2">
+      <h1>
+        Welcome
+        <% if account_signed_in? && current_account.user.present? && current_account.user.valid? %>
+          <%= current_account.user.first_name %>
+        <% end %>
+      </h1>
+    </div>
+  </div>
+  <div id="row">
+    <div id="col-sm-8 col-offset-2">
+      <ul>
+      <% @buildings.each do |b| %>
+        <li>Building: <%= b.name %>, from: <%= b.user.account.email %></li>
+        <ul>
+          <% b.rooms.each do |r| %>
+            <li><%= r.square_meter %></li>
+          <% end %>
+        </ul>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+
   <% if account_signed_in? && current_account.user.present? && current_account.user.valid? %>
-    <%= current_account.user.first_name %>
+
+
+   <div id="row">
+    <div id="col-sm-8 col-offset-2">
+      <h1>
+        My rooms:
+      </h1>
+    </div>
+  </div>
+  <div id="row">
+    <div id="col-sm-8 col-offset-2">
+      <ul>
+      <% @buildings.each do |b| %>
+        <% if b.user == current_account.user %>
+          <li>Building: <%= b.name %>, from: <%= b.user.account.email %></li>
+          <ul>
+            <% b.rooms.each do |r| %>
+              <li><%= r.square_meter %></li>
+            <% end %>
+          </ul>
+        <% end %>
+      <% end %>
+      </ul>
+    </div>
+  </div>
+
   <% end %>
-</h1>
+</div>
