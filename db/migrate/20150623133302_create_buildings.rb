@@ -8,8 +8,6 @@ class CreateBuildings < ActiveRecord::Migration
       t.integer :number_of_roommates
       t.boolean :garden, default: false
       t.boolean :balcony, default: false
-      t.integer :bathroom
-      t.integer :kitchen
       t.boolean :pets, default: false
       t.boolean :cleaning, default: false
       t.boolean :garage, default: false
