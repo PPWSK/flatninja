@@ -2,6 +2,7 @@ class BuildingsController < ApplicationController
   skip_before_action :authenticate_account!, only: [ :show, :index ]
 
   before_action :find_user, only: [ :new, :create, :edit, :update ]
+  before_action :get_rooms, only: [ :new, :create ]
 
   def index
 
@@ -15,11 +16,6 @@ class BuildingsController < ApplicationController
     # raise @user.inspect
     @building = Building.new
     @building.id = "-1"
-    @room1 = Room.new
-    @room2 = Room.new
-    @room3 = Room.new
-    @room4 = Room.new
-    @room5 = Room.new
   end
 
   def create
@@ -51,5 +47,16 @@ class BuildingsController < ApplicationController
   def find_user
     @user = User.find(params[:user_id])
   end
+
+  def get_rooms
+    @roomArray = [] unless @roomArray
+    @room1 = Room.new
+    @room2 = Room.new
+    @room3 = Room.new
+    @room4 = Room.new
+    @room5 = Room.new
+    @roomArray << @room1 << @room2 << @room3 << @room4 << @room5
+end
+
 
 end

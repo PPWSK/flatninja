@@ -34,35 +34,13 @@
           </div>
         </div>
 
-        <div class="row">
-          <div class="col-sm-12 room-card" id="room1">
-            <%= render partial: "rooms/form", locals: { user: @user, building: @building, room: @room1 } %>
+        <% @roomArray.each_with_index do |room, i| %>
+          <div class="row">
+            <div class="col-sm-12 room-card" id="room<%= i + 1 %>">
+              <%= render partial: "rooms/form", locals: { user: @user, building: @building, index: i, room: room } %>
+            </div>
           </div>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-12 room-card" id="room2">
-            <%= render partial: "rooms/form", locals: { user: @user, building: @building, room: @room2 } %>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-12 room-card" id="room3">
-            <%= render partial: "rooms/form", locals: { user: @user, building: @building, room: @room3 } %>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-12 room-card" id="room4">
-            <%= render partial: "rooms/form", locals: { user: @user, building: @building, room: @room4 } %>
-          </div>
-        </div>
-
-        <div class="row">
-          <div class="col-sm-12 room-card" id="room5">
-            <%= render partial: "rooms/form", locals: { user: @user, building: @building, room: @room5 } %>
-          </div>
-        </div>
+        <% end %>
 
       </div>
     </div>
@@ -104,7 +82,13 @@
       function set_room_text(){
         $('.optional_room_name').each(function( i ){
           if ($(this).val().length == 0 || rooms_a[$(this).attr('name').replace('room_name','')] == 0){
+
+          if ($('#optional_name').val().length == 0){
+            $(this).val($(this).closest('.room-card').attr('id'));
+          } else {
             $(this).val($('#optional_name').val() + " : " + $(this).closest('.room-card').attr('id'));
+          }
+
           }
         });
       }
