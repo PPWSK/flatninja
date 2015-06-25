@@ -1,5 +1,6 @@
 class Building < ActiveRecord::Base
   belongs_to :user, dependent: :destroy
+  has_many :rooms
 
   validates :user, presence: true
   validates :location, :number_of_rooms, :number_of_roommates, :building_type, presence: true

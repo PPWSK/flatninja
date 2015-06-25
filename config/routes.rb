@@ -1,5 +1,15 @@
 Rails.application.routes.draw do
 
+  get 'rooms/new'
+
+  get 'rooms/create'
+
+  get 'rooms/edit'
+
+  get 'rooms/update'
+
+  get 'rooms/destroy'
+
   devise_for :accounts, :controllers => { :registrations => "registrations" }
 
   resources :buildings, only: [ :new, :index, :show ]

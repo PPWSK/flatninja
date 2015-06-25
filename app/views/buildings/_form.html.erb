@@ -13,13 +13,16 @@
   </div>
   <div class="row">
     <div class="col-sm-5">
-      <%= f.input :number_of_rooms, label: 'How many sleeping rooms does the building have?', required: true, input_html: { min: '0', step: 'any' } %>
+      <%= f.input :number_of_rooms, label: 'How many sleeping rooms does the building have?', required: true, input_html: { value: '2', min: '0', step: 'any' } %>
     </div>
     <div class="col-sm-2">
     </div>
     <div class="col-sm-5">
-      <%= f.input :number_of_roommates, label: 'How many roommates are living here at the moment?', required: true, input_html: { min: '0', step: 'any' } %>
+      <%= f.input :number_of_roommates, label: 'How many roommates are living here at the moment?', required: true, input_html: { value: '1', min: '0', step: 'any' } %>
     </div>
+  </div>
+  <div class="row" id="notify_inline">
+    <h4></h4><br>
   </div>
 
   <!-- address -->

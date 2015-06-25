@@ -77,6 +77,7 @@
     $(document).ready(function(){
 
         var spare_rooms = 0;
+        calculate();
         add_rooms_html();
 
         $('#building_number_of_rooms').change(function(){
@@ -106,7 +107,8 @@
               $("#room3").css("visibility", "visible");
               $("#room4").css("visibility", "visible");
               $("#room5").css("visibility", "visible");
-              $("#notify_me > h3").html("5 rooms to fill!");
+              $("#notify_me > h3").html("Rooms:");
+              $("#notify_inline > h4").html("5 rooms for rent").css("color", "black");
               break;
             case 4:
               $("#room1").css("visibility", "visible");
@@ -114,7 +116,8 @@
               $("#room3").css("visibility", "visible");
               $("#room4").css("visibility", "visible");
               $("#room5").css("visibility", "hidden");
-              $("#notify_me > h3").html("4 rooms to fill!");
+              $("#notify_me > h3").html("Rooms:");
+              $("#notify_inline > h4").html("4 rooms for rent").css("color", "black");
               break;
             case 3:
               $("#room1").css("visibility", "visible");
@@ -122,7 +125,8 @@
               $("#room3").css("visibility", "visible");
               $("#room4").css("visibility", "hidden");
               $("#room5").css("visibility", "hidden");
-              $("#notify_me > h3").html("3 rooms to fill!");
+              $("#notify_me > h3").html("Rooms:");
+              $("#notify_inline > h4").html("3 rooms for rent").css("color", "black");
               break;
             case 2:
               $("#room1").css("visibility", "visible");
@@ -130,7 +134,8 @@
               $("#room3").css("visibility", "hidden");
               $("#room4").css("visibility", "hidden");
               $("#room5").css("visibility", "hidden");
-              $("#notify_me > h3").html("2 rooms to fill!");
+              $("#notify_me > h3").html("Rooms:");
+              $("#notify_inline > h4").html("2 rooms for rent").css("color", "black");
               break;
             case 1:
               $("#room1").css("visibility", "visible");
@@ -138,7 +143,8 @@
               $("#room3").css("visibility", "hidden");
               $("#room4").css("visibility", "hidden");
               $("#room5").css("visibility", "hidden");
-              $("#notify_me > h3").html("1 room to fill!");
+              $("#notify_me > h3").html("Room:");
+              $("#notify_inline > h4").html("1 room for rent").css("color", "black");
               break;
             case 0:
               $("#room1").css("visibility", "hidden");
@@ -146,10 +152,12 @@
               $("#room3").css("visibility", "hidden");
               $("#room4").css("visibility", "hidden");
               $("#room5").css("visibility", "hidden");
-              $("#notify_me > h3").html("You don't have any spare rooms ?");
+              $("#notify_me > h3").html("No rooms for rent ?");
+              $("#notify_inline > h4").html("No rooms for rent").css("color", "red");
               break;
             default:
               $("#notify_me > h3").html("let's start with 5 already");
+              $("#notify_inline > h4").html("max 5 rooms").css("color", "red");
               console.log("let's start with 5 already");
           }
         }
