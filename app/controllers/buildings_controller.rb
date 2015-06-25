@@ -14,6 +14,12 @@ class BuildingsController < ApplicationController
   def new
     # raise @user.inspect
     @building = Building.new
+    @building.id = "-1"
+    @room1 = Room.new
+    @room2 = Room.new
+    @room3 = Room.new
+    @room4 = Room.new
+    @room5 = Room.new
   end
 
   def create

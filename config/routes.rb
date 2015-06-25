@@ -1,25 +1,19 @@
 Rails.application.routes.draw do
 
-  get 'rooms/new'
-
-  get 'rooms/create'
-
-  get 'rooms/edit'
-
-  get 'rooms/update'
-
-  get 'rooms/destroy'
 
   devise_for :accounts, :controllers => { :registrations => "registrations" }
 
   resources :buildings, only: [ :new, :index, :show ]
 
   resources :users, except: [ :index, :destroy ] do
-    resources :buildings, only: [ :new, :create, :edit, :update, :destroy ]
+    resources :buildings, only: [ :new, :create, :edit, :update, :destroy ] do
+      resources :rooms, only: [ :new, :create, :edit, :update, :destroy ]
+    end
     resources :user_pictures, only: [ :new, :create, :destroy ]
   end
 
   root to: 'buildings#index'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

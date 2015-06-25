@@ -36,31 +36,31 @@
 
         <div class="row">
           <div class="col-sm-12 room-card" id="room1">
-            room1
+            <%= render partial: "rooms/form", locals: { user: @user, building: @building, room: @room1 } %>
           </div>
         </div>
 
         <div class="row">
           <div class="col-sm-12 room-card" id="room2">
-            room2
+            <%= render partial: "rooms/form", locals: { user: @user, building: @building, room: @room2 } %>
           </div>
         </div>
 
         <div class="row">
           <div class="col-sm-12 room-card" id="room3">
-            room3
+            <%= render partial: "rooms/form", locals: { user: @user, building: @building, room: @room3 } %>
           </div>
         </div>
 
         <div class="row">
           <div class="col-sm-12 room-card" id="room4">
-            room4
+            <%= render partial: "rooms/form", locals: { user: @user, building: @building, room: @room4 } %>
           </div>
         </div>
 
         <div class="row">
           <div class="col-sm-12 room-card" id="room5">
-            room5
+            <%= render partial: "rooms/form", locals: { user: @user, building: @building, room: @room5 } %>
           </div>
         </div>
 
@@ -76,89 +76,131 @@
   <%= javascript_tag do %>
     $(document).ready(function(){
 
-        var spare_rooms = 0;
+      <!-- for auto-name -->
+
+      var user_touched_name = false;
+      var user_touched_room_name = false;
+      var rooms_a = {};
+      set_room_ids();
+
+      $('*').not('#optional_name').on('input click', function(){
+        if ($('#optional_name').val().length == 0 || user_touched_name == false){
+          $('#optional_name').val($('#gmaps-input-address').val()).trigger('change');
+        }
+      });
+
+      $('#optional_name').bind('keydown', function(){
+        user_touched_name = true;
+      });
+
+      $('.optional_room_name').bind('keydown', function(){
+        rooms_a[$(this).attr('name').replace('room_name','')] = 1;
+      });
+
+      $('#optional_name').on('input change', function(){
+        set_room_text();
+      });
+
+      function set_room_text(){
+        $('.optional_room_name').each(function( i ){
+          if ($(this).val().length == 0 || rooms_a[$(this).attr('name').replace('room_name','')] == 0){
+            $(this).val($('#optional_name').val() + " : " + $(this).closest('.room-card').attr('id'));
+          }
+        });
+      }
+
+      function set_room_ids(){
+        $('.optional_room_name').each(function( index ){
+          $(this).attr('name', "room_name" + (index + 1));
+          rooms_a[index + 1] = 0;
+        });
+      }
+
+      <!-- for spare rooms generation -->
+
+      var spare_rooms = 0;
+      calculate();
+      add_rooms_html();
+
+      $('#building_number_of_rooms').change(function(){
         calculate();
         add_rooms_html();
+      });
 
-        $('#building_number_of_rooms').change(function(){
-          calculate();
-          add_rooms_html();
-        });
+      $('#building_number_of_roommates').change(function(){
+        calculate();
+        add_rooms_html();
+      });
 
-        $('#building_number_of_roommates').change(function(){
-          calculate();
-          add_rooms_html();
-        });
+      function calculate(){
+        var n_rooms = $('#building_number_of_rooms').val();
+        var n_roommates = $('#building_number_of_roommates').val();
+        spare_rooms = n_rooms - n_roommates;
 
-        function calculate(){
-          var n_rooms = $('#building_number_of_rooms').val();
-          var n_roommates = $('#building_number_of_roommates').val();
-          spare_rooms = n_rooms - n_roommates;
+      }
 
-        }
+      function add_rooms_html(){
+        console.log(spare_rooms);
 
-        function add_rooms_html(){
-          console.log(spare_rooms);
-
-          switch(spare_rooms) {
-            case 5:
-              $("#room1").css("visibility", "visible");
-              $("#room2").css("visibility", "visible");
-              $("#room3").css("visibility", "visible");
-              $("#room4").css("visibility", "visible");
-              $("#room5").css("visibility", "visible");
-              $("#notify_me > h3").html("Rooms:");
-              $("#notify_inline > h4").html("5 rooms for rent").css("color", "black");
-              break;
-            case 4:
-              $("#room1").css("visibility", "visible");
-              $("#room2").css("visibility", "visible");
-              $("#room3").css("visibility", "visible");
-              $("#room4").css("visibility", "visible");
-              $("#room5").css("visibility", "hidden");
-              $("#notify_me > h3").html("Rooms:");
-              $("#notify_inline > h4").html("4 rooms for rent").css("color", "black");
-              break;
-            case 3:
-              $("#room1").css("visibility", "visible");
-              $("#room2").css("visibility", "visible");
-              $("#room3").css("visibility", "visible");
-              $("#room4").css("visibility", "hidden");
-              $("#room5").css("visibility", "hidden");
-              $("#notify_me > h3").html("Rooms:");
-              $("#notify_inline > h4").html("3 rooms for rent").css("color", "black");
-              break;
-            case 2:
-              $("#room1").css("visibility", "visible");
-              $("#room2").css("visibility", "visible");
-              $("#room3").css("visibility", "hidden");
-              $("#room4").css("visibility", "hidden");
-              $("#room5").css("visibility", "hidden");
-              $("#notify_me > h3").html("Rooms:");
-              $("#notify_inline > h4").html("2 rooms for rent").css("color", "black");
-              break;
-            case 1:
-              $("#room1").css("visibility", "visible");
-              $("#room2").css("visibility", "hidden");
-              $("#room3").css("visibility", "hidden");
-              $("#room4").css("visibility", "hidden");
-              $("#room5").css("visibility", "hidden");
-              $("#notify_me > h3").html("Room:");
-              $("#notify_inline > h4").html("1 room for rent").css("color", "black");
-              break;
-            case 0:
-              $("#room1").css("visibility", "hidden");
-              $("#room2").css("visibility", "hidden");
-              $("#room3").css("visibility", "hidden");
-              $("#room4").css("visibility", "hidden");
-              $("#room5").css("visibility", "hidden");
-              $("#notify_me > h3").html("No rooms for rent ?");
-              $("#notify_inline > h4").html("No rooms for rent").css("color", "red");
-              break;
-            default:
-              $("#notify_me > h3").html("let's start with 5 already");
-              $("#notify_inline > h4").html("max 5 rooms").css("color", "red");
-              console.log("let's start with 5 already");
+        switch(spare_rooms) {
+          case 5:
+            $("#room1").css("visibility", "visible");
+            $("#room2").css("visibility", "visible");
+            $("#room3").css("visibility", "visible");
+            $("#room4").css("visibility", "visible");
+            $("#room5").css("visibility", "visible");
+            $("#notify_me > h3").html("Rooms:");
+            $("#notify_inline > h4").html("5 rooms for rent").css("color", "black");
+            break;
+          case 4:
+            $("#room1").css("visibility", "visible");
+            $("#room2").css("visibility", "visible");
+            $("#room3").css("visibility", "visible");
+            $("#room4").css("visibility", "visible");
+            $("#room5").css("visibility", "hidden");
+            $("#notify_me > h3").html("Rooms:");
+            $("#notify_inline > h4").html("4 rooms for rent").css("color", "black");
+            break;
+          case 3:
+            $("#room1").css("visibility", "visible");
+            $("#room2").css("visibility", "visible");
+            $("#room3").css("visibility", "visible");
+            $("#room4").css("visibility", "hidden");
+            $("#room5").css("visibility", "hidden");
+            $("#notify_me > h3").html("Rooms:");
+            $("#notify_inline > h4").html("3 rooms for rent").css("color", "black");
+            break;
+          case 2:
+            $("#room1").css("visibility", "visible");
+            $("#room2").css("visibility", "visible");
+            $("#room3").css("visibility", "hidden");
+            $("#room4").css("visibility", "hidden");
+            $("#room5").css("visibility", "hidden");
+            $("#notify_me > h3").html("Rooms:");
+            $("#notify_inline > h4").html("2 rooms for rent").css("color", "black");
+            break;
+          case 1:
+            $("#room1").css("visibility", "visible");
+            $("#room2").css("visibility", "hidden");
+            $("#room3").css("visibility", "hidden");
+            $("#room4").css("visibility", "hidden");
+            $("#room5").css("visibility", "hidden");
+            $("#notify_me > h3").html("Room:");
+            $("#notify_inline > h4").html("1 room for rent").css("color", "black");
+            break;
+          case 0:
+            $("#room1").css("visibility", "hidden");
+            $("#room2").css("visibility", "hidden");
+            $("#room3").css("visibility", "hidden");
+            $("#room4").css("visibility", "hidden");
+            $("#room5").css("visibility", "hidden");
+            $("#notify_me > h3").html("No rooms for rent ?");
+            $("#notify_inline > h4").html("No rooms for rent").css("color", "red");
+            break;
+          default:
+            $("#notify_me > h3").html("let's start with 5 already");
+            $("#notify_inline > h4").html("max 5 rooms").css("color", "red");
+            console.log("let's start with 5 already");
           }
         }
 
