@@ -11,9 +11,8 @@
           <div class="col-sm-2 col-lg-2">
           <%= image_tag upic.file.url(:thumb) %>
 
-            <%= simple_form_for([@user, upic], method: :delete) do |f| %>
-              <%= f.button :submit, :value => "delete" %>
-            <% end %>
+            <%= link_to ("<i class='fa fa-times fa-lg' style='color: red;'> </i>").html_safe, user_user_picture_path(@user, upic), :method=> :delete %>
+
           </div>
         <% end %>
       </div>
