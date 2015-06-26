@@ -26,16 +26,18 @@
   </div>
 
   <!-- address -->
+
   <div class="row">
     <div class="form-group">
       <%= f.input :location, input_html: { id: 'gmaps-input-address'}, placeholder: 'Start typing a place name...', class: 'form-control' %>
 
       <div id='gmaps-error'></div>
-      <div id='gmaps-canvas'></div>
     </div>
   </div>
 
+
   <!-- optional information -->
+
   <div class="row">
     <div class="col-sm-5">
     <%= f.input :garden, label: 'Has a garden ?', required: false %>

@@ -1,12 +1,8 @@
+<!-- NEW ROOM: INCLUDES ROOMS & BUILDINGS -->
+
 <%= simple_form_for([@user, @building],  html: { novalidate: true, role: "form", class: "row" }, wrapper: :vertical_input_group ) do |f| %>
 
-  <!-- left: BUILDING -->
-
-
-  <div class="col-sm-2 my-left-bar">
-    &nbsp;
-  </div>
-
+  <!-- left: ROOM -->
 
   <div class="col-sm-6" name="rooms">
     <div class="row">
@@ -21,6 +17,8 @@
     <% end %>
   </div>
 
+  <!-- right: BUILDING -->
+
   <div class="col-sm-6" name="building">
     <div class="row">
       <div class="col-sm-11 col-sm-offset-1">
@@ -34,9 +32,14 @@
     </div>
   </div>
 
-  <div class="final-button"><br>
-    <%= f.submit "submit", value: "done", id: "submitter" %>
+  <!-- super-left: NAVBAR -->
+
+  <div class="col-sm-2">
+    <div class="final-button"><br>
+      <%= f.submit "submit", value: "done", id: "submitter" %>
+    </div>
   </div>
+
 
 <% end %>
 
