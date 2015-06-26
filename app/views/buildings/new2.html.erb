@@ -1,51 +1,63 @@
-<%= simple_form_for([@user, @building],  html: { novalidate: true, role: "form", class: "row" }) do |f| %>
+<%= simple_form_for([@user, @building],  html: { novalidate: true, role: "form" }) do |f| %>
 
-  <!-- left: BUILDING -->
+      <!-- left: BUILDING -->
 
-  <!--
-  <div class="col-sm-2 my-left-bar">
-    &nbsp;
-  </div>
-  -->
-
-  <div class="col-sm-6" name="building">
-    <div class="row">
-      <div class="col-sm-11">
-        <h3>The building:</h3><br>
+      <div class="col-sm-2 my-left-bar">
+        &nbsp;
       </div>
-    </div>
-    <div class="row">
-      <div class="col-sm-11">
-        <%= render partial: 'form', locals: { f: f } %>
-      </div>
-    </div>
-  </div>
 
-  <div class="col-sm-6" name="rooms">
-    <div class="row">
-      <div class="col-sm-11 col-sm-offset-1" id="notify_me">
-        <h3></h3>
+      <div class="col-sm-2">
+        &nbsp;
       </div>
-    </div>
 
-    <% @room_array.each_with_index do |room, i| %>
-      <div class=room_array"row">
-        <div class="col-sm-11 room-card col-sm-offset-1" id="room<%= i + 1 %>">
-          <%= render partial: "rooms/form2", locals: { f: f, i: (i+1), room: room } %>
+      <div class="col-sm-4" name="building">
+        <div class="row">
+          <div class="col-sm-12">
+            <h3>The building:</h3><br>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <%= render partial: 'form', locals: { f: f } %>
+          </div>
         </div>
       </div>
+
+      <!-- middle: SPACE -->
+
+      <div class="col-sm-1"></div>
+
+      <!-- right: ROOMS -->
+
+      <div class="col-sm-4" name="rooms">
+
+        <div class="row">
+          <div class="col-sm-12" id="notify_me">
+            <h3></h3>
+          </div>
+        </div>
+
+        <% @room_array.each_with_index do |room, i| %>
+          <div class="row">
+            <div class="col-sm-12 room-card" id="room<%= i + 1 %>">
+              <%= render partial: "rooms/form", locals: { f: f, i: (i+1), room: room } %>
+            </div>
+          </div>
+        <% end %>
+
+      </div>
+
+      <!-- right: SPACE -->
+
+      <div class="col-sm-1"></div>
+
+      <!-- floating button -->
+
+      <div class="final-button"><br>
+        <%= f.submit "submit", value: "done", id: "submitter" %>
+      </div>
+
     <% end %>
-  </div>
-
-
-
-  <div class="final-button"><br>
-    <%= f.submit "submit", value: "done", id: "submitter" %>
-  </div>
-
-
-
-<% end %>
 
 
 
@@ -193,3 +205,30 @@
     });
   <% end %>
 <% end %>
+
+
+<div class="container">
+    <div class="row">
+        <!-- Card Projects -->
+        <div class="col-md-6 col-md-offset-3">
+            <div class="card">
+                <div class="card-image">
+                    <img class="img-responsive" src="http://material-design.storage.googleapis.com/publish/v_2/material_ext_publish/0Bx4BSt6jniD7TDlCYzRROE84YWM/materialdesign_introduction.png">
+                    <span class="card-title">Material Cards</span>
+                </div>
+
+                <div class="card-content">
+                    <p>Cards for display in portfolio style material design by Google.</p>
+                </div>
+
+                <div class="card-action">
+                    <a href="#" target="new_blank">Link</a>
+                    <a href="#" target="new_blank">Link</a>
+                    <a href="#" target="new_blank">Link</a>
+                    <a href="#" target="new_blank">Link</a>
+                    <a href="#" target="new_blank">Link</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,71 @@
+<!-- Card Projects -->
+<div class="card row">
+  <div class="card-image col-sm-10 col-sm-offset-1">
+    <%= f.simple_fields_for :room, html: { class: "row" } do |r| %>
+
+      <div class="col-sm-8">
+        <div class="row">
+          <!-- TODO: optional name makes parameter not being sent -->
+          <div class="col-sm-12">
+            <%= r.input :optional_name, label: "Optional room name", input_html: { name: "building[room"+i.to_s+"][optional_name]" }, class: 'optional_room_name', required: false %>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-5">
+            <%= r.input :price, input_html: { name: "building[room"+i.to_s+"][price]" }, label: "Price in EUR", required: true %>
+          </div>
+          <div class="col-sm-5 col-sm-offset-2">
+
+
+            <div class="input-group">
+              <%= r.input :square_meter, input_html: { name: "building[room"+i.to_s+"][square_meter]" }, label: false, required: true %>
+              <span class="input-group-addon" id="basic-addon2">m<sup>2</sup></span>
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-5">
+            <%= r.input :available_from, as: :date_picker, input_html: {name: "building[room"+i.to_s+"][available_from]", data: {date_options: {defaultDate: Date.today, disabledDates: [Date.today - 700, Date.today.prev_day]}}}, label: 'Available from:', required: true %>
+          </div>
+          <div class="col-sm-5 col-sm-offset-2">
+            <%= r.input :months_available, input_html: { name: "building[room"+i.to_s+"][months_available]" }, label: 'Months available', required: true %>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-3 col-sm-offset-1">
+        <div class="row">
+          <%= r.input :private_bathroom, input_html: { name: "building[room"+i.to_s+"][private_bathroom]" }, label: 'Private bathroom?', as: :boolean, required: false %>
+        </div>
+        <div class="row">
+          <%= r.input :private_kitchen, input_html: { name: "building[room"+i.to_s+"][private_kitchen]" }, label: 'Private kitchen?', as: :boolean, required: false %>
+        </div>
+        <div class="row">
+          <%= r.input :private_balcony, input_html: { name: "building[room"+i.to_s+"][private_balcony]" }, label: 'Private balcony?', as: :boolean, required: false %>
+        </div>
+        <div class="row">
+          <%= r.input :private_garden, input_html: { name: "building[room"+i.to_s+"][private_garden]" }, label: 'Private garden?', as: :boolean, required: false %>
+        </div>
+        <div class="row">
+          <%= r.input :private_parking, input_html: { name: "building[room"+i.to_s+"][private_parking]" }, label: 'Private parking?', as: :boolean, required: false %>
+        </div>
+      </div>
+
+    <% end %>
+
+    <!-- <span class="card-title">Material Cards</span> -->
+  </div>
+  <!--
+    <div class="card-content">
+      <p>Cards for display in portfolio style material design by Google.</p>
+    </div>
+  -->
+
+  <div class="card-action">
+    <a href="#" target="new_blank">Link</a>
+    <a href="#" target="new_blank">Link</a>
+    <a href="#" target="new_blank">Link</a>
+    <a href="#" target="new_blank">Link</a>
+    <a href="#" target="new_blank">Link</a>
+  </div>
+</div>

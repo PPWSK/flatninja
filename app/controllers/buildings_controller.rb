@@ -9,14 +9,10 @@ class BuildingsController < ApplicationController
   end
 
   def show
-
   end
 
   def new
-    # raise @user.inspect
     @building = Building.new
-    @building.rooms.build
-    # @building.id = "-1"
   end
 
   def create
@@ -98,7 +94,5 @@ class BuildingsController < ApplicationController
     @room4 = Room.new
     @room5 = Room.new
     @room_array << @room1 << @room2 << @room3 << @room4 << @room5
-end
-
-
+  end
 end
