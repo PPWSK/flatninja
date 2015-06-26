@@ -1,7 +1,7 @@
 class Building < ActiveRecord::Base
   belongs_to :user, dependent: :destroy
   has_many :rooms
-  accepts_nested_attributes_for :rooms
+  accepts_nested_attributes_for :rooms, reject_if: proc { |attributes| attributes[:price].blank? }
 
   validates :user, presence: true
   validates :location, :number_of_rooms, :number_of_roommates, :building_type, presence: true

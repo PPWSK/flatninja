@@ -1,53 +1,44 @@
-<%= simple_form_for([@user, @building],  html: { novalidate: true, role: "form", class: "row" }) do |f| %>
+<%= simple_form_for([@user, @building],  html: { novalidate: true, role: "form", class: "row" }, wrapper: :vertical_input_group ) do |f| %>
 
   <!-- left: BUILDING -->
 
-  <!--
+
   <div class="col-sm-2 my-left-bar">
     &nbsp;
   </div>
-  -->
+
+
+  <div class="col-sm-6" name="rooms">
+    <div class="row">
+      <div class="col-sm-11" id="notify_me">
+        <h3></h3>
+      </div>
+    </div>
+    <%= f.simple_fields_for :rooms, html: { class: "row" } do |r| %>
+      <div class="col-sm-11 room-card" id="room<%= r.index + 1%>">
+        <%= render partial: "rooms/form2", locals: { r: r } %>
+      </div>
+    <% end %>
+  </div>
 
   <div class="col-sm-6" name="building">
     <div class="row">
-      <div class="col-sm-11">
+      <div class="col-sm-11 col-sm-offset-1">
         <h3>The building:</h3><br>
       </div>
     </div>
     <div class="row">
-      <div class="col-sm-11">
+      <div class="col-sm-11 col-sm-offset-1">
         <%= render partial: 'form', locals: { f: f } %>
       </div>
     </div>
   </div>
 
-  <div class="col-sm-6" name="rooms">
-    <div class="row">
-      <div class="col-sm-11 col-sm-offset-1" id="notify_me">
-        <h3></h3>
-      </div>
-    </div>
-
-    <% @room_array.each_with_index do |room, i| %>
-      <div class=room_array"row">
-        <div class="col-sm-11 room-card col-sm-offset-1" id="room<%= i + 1 %>">
-          <%= render partial: "rooms/form2", locals: { f: f, i: (i+1), room: room } %>
-        </div>
-      </div>
-    <% end %>
-  </div>
-
-
-
   <div class="final-button"><br>
     <%= f.submit "submit", value: "done", id: "submitter" %>
   </div>
 
-
-
 <% end %>
-
-
 
 
 <!-- JQUERY SECTION -->
