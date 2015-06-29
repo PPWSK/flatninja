@@ -23,7 +23,7 @@
       <% end %>
     </div>
 
-    <span class="card-title">Room pictures</span>
+    <span class="card-title"><%= room.optional_name %></span>
 
   </div>
 
@@ -34,14 +34,6 @@
       <div class="card-image col-sm-10 col-sm-offset-1">
         <div class="row form-inputs">
           <div class="col-sm-8">
-            <div class="row">
-              <!-- TODO: optional name makes parameter not being sent -->
-              <div class="col-sm-12">
-
-                <%= room.optional_name %>
-
-              </div>
-            </div>
             <div class="row">
               <div class="col-sm-6">
                 <div class="">
@@ -91,14 +83,15 @@
             </div>
           </div>
         </div>
-        <span class="card-title">Room details</span>
       </div>
     </div>
   </div>
 
   <div class="card-action">
-    <%= link_to "Edit" , edit_user_building_room_path(user, room.building, room) %>
-
+    <% if account_signed_in? && current_account.user.present? && current_account.user == user %>
+      <%= link_to "Edit" , edit_user_building_room_path(user, room.building, room) %>
+      <%= link_to "Publish" , edit_user_building_room_path(user, room.building, room) %>
+    <% end %>
   </div>
 
 </div>

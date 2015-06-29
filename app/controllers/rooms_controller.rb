@@ -19,7 +19,7 @@ class RoomsController < ApplicationController
   def update
     if @room.update(room_params)
       flash[:notice] = "Room updated"
-      redirect_to edit_user_building_room_path(@user, @building, @room)
+      redirect_to myrooms_user_buildings_path(current_account.user.id, extra: @building.id)
     else
       flash[:alert] = "Error, room not updated!"
       render :edit

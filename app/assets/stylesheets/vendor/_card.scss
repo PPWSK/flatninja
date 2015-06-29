@@ -8,13 +8,18 @@
   border-radius: 2px;
   background-clip: padding-box;
 }
-.card span.card-title {
+.card span.card-title-form {
     color: #fff;
     font-size: 12px;
     font-weight: 50;
     text-transform: uppercase;
 }
-
+.card span.card-title {
+    color: #fff;
+    font-size: 24px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
 .card .card-image {
   position: relative;
   overflow: hidden;

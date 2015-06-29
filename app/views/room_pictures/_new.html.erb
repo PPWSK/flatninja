@@ -1,4 +1,4 @@
-<%= simple_form_for([@user, @building, room, RoomPicture.new], html: { class: "form-horizontal", multipart: true }) do |f| %>
+<%= simple_form_for([@user, @building, room, RoomPicture.new], html: { class: "form-inline", multipart: true }) do |f| %>
   <%= f.error_notification %>
 
   <%= f.file_field :file, required: true, label: false, input_html: { class: "my-selector" } %>

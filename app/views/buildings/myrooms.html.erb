@@ -1,24 +1,25 @@
 <% if account_signed_in? && current_account.user.present? && current_account.user.valid? %>
   <div class="row">
-    <div class="col-sm-4">
-      <% @buildings.each do |b| %>
-        <div class="row">
 
-          <%= link_to ("<p>" + b.name + "</p><p>" + b.location + "</p>").html_safe, myrooms_user_buildings_path(current_account.user.id, extra: b.id) %>
+    <!-- building list -->
+
+    <div class="col-sm-4 building-menu">
+      <% @buildings.each do |b| %>
+        <div class="row building-item">
+
+          <%= link_to ("<p class='building-item-title'>" + b.name + "</p><p>" + b.location + "</p>").html_safe, myrooms_user_buildings_path(current_account.user.id, extra: b.id) %>
 
         </div>
+      <% end %>
     </div>
+
+    <!-- rooms per building -->
+
     <div class="col-sm-8">
-        <% @right_rooms.each do |r| %>
-          <row>
-            <%= render partial: 'rooms/show', locals: { local_room: r, local_user: @user } %>
-          </row>
-        <% end %>
-
-    <!-- add a room SHOW -->
-    <!-- add an edit button -->
-    <!-- add a create OFFER link -->
-
+      <% @right_rooms.each do |r| %>
+        <div class="row">
+          <%= render partial: 'rooms/show', locals: { local_room: r, local_user: @user } %>
+        </div>
       <% end %>
     </div>
   </div>

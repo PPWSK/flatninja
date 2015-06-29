@@ -4,6 +4,23 @@
   visibility: hidden;
 }
 
+.building-menu {
+  padding-top: 14px;
+}
+
+.building-item {
+  padding-top: 5%;
+  padding-bottom: 5%;
+}
+
+.building-item-title {
+  font-size: 24px;
+  font-weight: 300;
+  text-transform: uppercase;
+  // padding-bottom: -5%;
+  margin-bottom: -0px;
+}
+
 .final-button {
   height: 104px;
   width: 104px;
@@ -43,4 +60,24 @@
   // background: $gray-light;
   left: -4%;
   top: 0px;
+}
+
+.btn-file {
+    position: relative;
+    overflow: hidden;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 100px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
 }
