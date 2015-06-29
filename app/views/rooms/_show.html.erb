@@ -91,6 +91,15 @@
     <% if account_signed_in? && current_account.user.present? && current_account.user == user %>
       <%= link_to "Edit" , edit_user_building_room_path(user, room.building, room) %>
       <%= link_to "Publish" , edit_user_building_room_path(user, room.building, room) %>
+    <% else %>
+      <div class="row">
+        <div class="col-sm-6 like-it">
+        <%= link_to ("<i class='fa fa-heart fa-4x' style='color: red;'></i>").html_safe, root_path %>
+        </div>
+        <div class="col-sm-6 like-it">
+        <%= link_to ("<i class='fa fa-times fa-4x' style='color: black;'></i>").html_safe, root_path %>
+        </div>
+      </div>
     <% end %>
   </div>
 
