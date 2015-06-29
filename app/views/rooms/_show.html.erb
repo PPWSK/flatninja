@@ -1,0 +1,104 @@
+<% if local_assigns.has_key? :local_room %>
+  <% room = local_room %>
+<% end %>
+<% if local_assigns.has_key? :local_user %>
+  <% user = local_user %>
+<% end %>
+
+<div class="card">
+  <div class="card-image" id="main-content">
+    <div class="row">
+
+      <% room.room_pictures.each do |rpic| %>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 img-wrap">
+
+          <%= image_tag rpic.file.url(:medium), class: "img-responsive" %>
+
+        </div>
+      <% end %>
+      <% if room.room_pictures.size == 0 %>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+          <%= image_tag "empty.png", class: "img-responsive" %>
+        </div>
+      <% end %>
+    </div>
+
+    <span class="card-title">Room pictures</span>
+
+  </div>
+
+  <div class="card-content">
+    <div class="row">
+      <!-- ROOMS FORM -->
+      <!-- <div class="card row"> -->
+      <div class="card-image col-sm-10 col-sm-offset-1">
+        <div class="row form-inputs">
+          <div class="col-sm-8">
+            <div class="row">
+              <!-- TODO: optional name makes parameter not being sent -->
+              <div class="col-sm-12">
+
+                <%= room.optional_name %>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="">
+
+                  <%= room.price %>
+
+                </div>
+              </div>
+              <div class="col-sm-5 col-sm-offset-1">
+                <div class="input-group">
+
+                  <%= room.square_meter %>
+
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+
+                <%= room.available_from %>
+
+              </div>
+              <div class="col-sm-5 col-sm-offset-1">
+
+                <%= room.months_available %>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3 col-sm-offset-1">
+            <div class="row">
+
+              <%= room.private_bathroom ? "Private Bathroom" : "No Private Bathroom" %>
+
+            </div>
+            <div class="row">
+              <%= room.private_kitchen ? "Private Kitchen" : "No Private Kitchen" %>
+            </div>
+            <div class="row">
+              <%= room.private_balcony ? "Private Balcony" : "No Private Balcony" %>
+            </div>
+            <div class="row">
+              <%= room.private_garden ? "Private Garden" : "No Private Garden" %>
+            </div>
+            <div class="row">
+              <%= room.private_parking ? "Private Parking" : "No Private Parking" %>
+            </div>
+          </div>
+        </div>
+        <span class="card-title">Room details</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-action">
+    <%= link_to "Edit" , edit_user_building_room_path(user, room.building, room) %>
+
+  </div>
+
+</div>

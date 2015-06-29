@@ -7,8 +7,8 @@ class Room < ActiveRecord::Base
   #validates :building, presence: true
   validates :price, :square_meter, presence: true
 
-  def strip_whitespace
-    self.name = self.name.presence || "A very nice room"
+  def assign_default_name
+    self.optional_name = self.optional_name.presence || "A very nice room"
   end
 
 end

@@ -1,4 +1,4 @@
-<!-- NEW ROOM: INCLUDES ROOMS & BUILDINGS -->
+<!-- NEW BUILDING: INCLUDES ROOMS & BUILDINGS -->
 
 <%= simple_form_for([@user, @building],  html: { novalidate: true, role: "form", class: "row" }, wrapper: :vertical_input_group ) do |f| %>
 
@@ -12,7 +12,7 @@
     </div>
     <%= f.simple_fields_for :rooms, html: { class: "row" } do |r| %>
       <div class="col-sm-11 room-card" id="room<%= r.index + 1%>">
-        <%= render partial: "rooms/form2", locals: { r: r } %>
+        <%= render partial: "rooms/form_room_for_building_create", locals: { r: r } %>
       </div>
     <% end %>
   </div>

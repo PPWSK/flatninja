@@ -21,93 +21,87 @@
 
   </div>
 
-    <div class="card-content">
+  <%= simple_form_for([@user, @building, @room],  html: { novalidate: true, role: "form", class: "row" }, wrapper: :vertical_input_group ) do |r| %>
 
-      <%= simple_form_for([@user, @building, @room],  html: { novalidate: true, role: "form", class: "row" }, wrapper: :vertical_input_group ) do |r| %>
+  <div class="card-content">
+    <div class="row">
+      <!-- ROOMS FORM -->
+      <!-- <div class="card row"> -->
+      <div class="card-image col-sm-10 col-sm-offset-1">
+        <div class="row form-inputs">
+          <div class="col-sm-8">
+            <div class="row">
+              <!-- TODO: optional name makes parameter not being sent -->
+              <div class="col-sm-12">
 
-        <!-- ROOMS FORM -->
-        <!-- <div class="card row"> -->
-          <div class="card-image col-sm-10 col-sm-offset-1">
-            <div class="row form-inputs">
+                <%= r.input :optional_name, wrapper: :vertical_input_group, label: "Room name", class: 'optional_room_name', required: false do %>
+                  <%= r.input_field :optional_name, class: "form-control" %>
+                <% end %>
 
-              <div class="col-sm-8">
-                <div class="row">
-                  <!-- TODO: optional name makes parameter not being sent -->
-                  <div class="col-sm-12">
-
-                    <%= r.input :optional_name, wrapper: :vertical_input_group, label: "Room name", class: 'optional_room_name', required: false do %>
-                      <%= r.input_field :optional_name, class: "form-control" %>
-                    <% end %>
-
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-6">
-                    <div class="">
-
-                      <%= r.input :price, wrapper: :vertical_input_group, label: "Price", required: true do %>
-                        <%= r.input_field :price, class: "form-control" %>
-                        <span class="input-group-addon">€</span>
-                      <% end %>
-
-                    </div>
-                  </div>
-                  <div class="col-sm-5 col-sm-offset-1">
-                    <div class="input-group">
-
-                      <%= r.input :square_meter, wrapper: :vertical_input_group, label: "Size", required: true do %>
-                        <%= r.input_field :square_meter, class: "form-control" %>
-                        <span class="input-group-addon">m<sup>2</sup></span>
-                      <% end %>
-
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col-sm-6">
-
-                    <%= r.input :available_from, as: :date_picker, input_html: { data: {date_options: {defaultDate: Date.today, disabledDates: [Date.today - 700, Date.today.prev_day]}}}, label: 'Available from:', required: true %>
-
-                  </div>
-                  <div class="col-sm-5 col-sm-offset-1">
-                    <%= r.input :months_available, label: 'For', wrapper: :vertical_input_group, placeholder: "12 months", required: true %>
-                  </div>
-                </div>
               </div>
-              <div class="col-sm-3 col-sm-offset-1">
-                <div class="row">
-                  <%= r.input :private_bathroom, label: 'Private bathroom?', as: :boolean, required: false %>
-                </div>
-                <div class="row">
-                  <%= r.input :private_kitchen, label: 'Private kitchen?', as: :boolean, required: false %>
-                </div>
-                <div class="row">
-                  <%= r.input :private_balcony, label: 'Private balcony?', as: :boolean, required: false %>
-                </div>
-                <div class="row">
-                  <%= r.input :private_garden, label: 'Private garden?', as: :boolean, required: false %>
-                </div>
-                <div class="row">
-                  <%= r.input :private_parking, label: 'Private parking?', as: :boolean, required: false %>
-                </div>
-              </div>
-
             </div>
+            <div class="row">
+              <div class="col-sm-6">
+                <div class="">
 
-            <!-- <span class="card-title">Material Cards</span> -->
+                  <%= r.input :price, wrapper: :vertical_input_group, label: "Price", required: true do %>
+                    <%= r.input_field :price, class: "form-control" %>
+                    <span class="input-group-addon">€</span>
+                  <% end %>
+
+                </div>
+              </div>
+              <div class="col-sm-5 col-sm-offset-1">
+                <div class="input-group">
+
+                  <%= r.input :square_meter, wrapper: :vertical_input_group, label: "Size", required: true do %>
+                    <%= r.input_field :square_meter, class: "form-control" %>
+                    <span class="input-group-addon">m<sup>2</sup></span>
+                  <% end %>
+
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-6">
+
+                <%= r.input :available_from, as: :date_picker, input_html: { data: {date_options: {defaultDate: Date.today, disabledDates: [Date.today - 700, Date.today.prev_day]}}}, label: 'Available from:', required: true %>
+
+              </div>
+              <div class="col-sm-5 col-sm-offset-1">
+                <%= r.input :months_available, label: 'For', wrapper: :vertical_input_group, placeholder: "12 months", required: true %>
+              </div>
+            </div>
           </div>
-
-        <% end %>
-
+          <div class="col-sm-3 col-sm-offset-1">
+            <div class="row">
+              <%= r.input :private_bathroom, label: 'Private bathroom?', as: :boolean, required: false %>
+            </div>
+            <div class="row">
+              <%= r.input :private_kitchen, label: 'Private kitchen?', as: :boolean, required: false %>
+            </div>
+            <div class="row">
+              <%= r.input :private_balcony, label: 'Private balcony?', as: :boolean, required: false %>
+            </div>
+            <div class="row">
+              <%= r.input :private_garden, label: 'Private garden?', as: :boolean, required: false %>
+            </div>
+            <div class="row">
+              <%= r.input :private_parking, label: 'Private parking?', as: :boolean, required: false %>
+            </div>
+          </div>
+        </div>
+        <!-- <span class="card-title">Material Cards</span> -->
+      </div>
     </div>
+  </div>
 
-    <div class="card-action">
-        <a href="#" target="new_blank">Link</a>
-        <a href="#" target="new_blank">Link</a>
-        <a href="#" target="new_blank">Link</a>
-        <a href="#" target="new_blank">Link</a>
-        <a href="#" target="new_blank">Link</a>
-    </div>
+  <div class="card-action">
+    <%= r.submit "submit", value: "update" %>
+  </div>
+
+  <% end %>
+
 </div>
 
 <!-- JQUERY SECTION -->

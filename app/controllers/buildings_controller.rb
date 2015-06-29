@@ -17,7 +17,6 @@ class BuildingsController < ApplicationController
   end
 
   def create
-    raise building_params.inspect
     @building = @user.buildings.build(building_params)
 
     if @building.save!

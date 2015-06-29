@@ -1,34 +1,4 @@
- <% if account_signed_in? && current_account.user.present? && current_account.user.valid? %>
-
-
-   <div id="row">
-    <div id="col-sm-8 col-offset-2">
-      <h1>
-        My rooms:
-      </h1>
-    </div>
-  </div>
-
-  <div id="row">
-    <div id="col-sm-8 col-offset-2">
-      <ul>
-      <% @buildings.each do |b| %>
-
-          <li>Building: <%= b.name %>, from: <%= b.user.account.email %></li>
-          <ul>
-            <% b.rooms.each do |r| %>
-              <li><%= link_to r.optional_name + ": sqm: " + r.square_meter.to_s + ", price: " + r.price.to_s , edit_user_building_room_path(b.user, b, r) %></li>
-            <% end %>
-          </ul>
-
-      <% end %>
-      </ul>
-    </div>
-  </div>
-
-  <% end %>
-
-
+<% if account_signed_in? && current_account.user.present? && current_account.user.valid? %>
   <div class="row">
     <div class="col-sm-4">
       <% @buildings.each do |b| %>
@@ -37,17 +7,19 @@
           <%= link_to ("<p>" + b.name + "</p><p>" + b.location + "</p>").html_safe, myrooms_user_buildings_path(current_account.user.id, extra: b.id) %>
 
         </div>
-
     </div>
     <div class="col-sm-8">
-      <% @right_rooms.each do |r| %>
-        <li><%= link_to r.optional_name + ": sqm: " + r.square_meter.to_s + ", price: " + r.price.to_s , edit_user_building_room_path(b.user, b, r) %></li>
-      <% end %>
-
-      <!-- add a room SHOW -->
-      <!-- add an edit button -->
-      <!-- add a create OFFER link -->
-
+        <% @right_rooms.each do |r| %>
+          <row>
+            <%= render partial: 'rooms/show', locals: { local_room: r, local_user: @user } %>
+          </row>
         <% end %>
+
+    <!-- add a room SHOW -->
+    <!-- add an edit button -->
+    <!-- add a create OFFER link -->
+
+      <% end %>
     </div>
   </div>
+<% end %>
