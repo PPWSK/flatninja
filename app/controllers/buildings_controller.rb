@@ -1,7 +1,7 @@
 class BuildingsController < ApplicationController
   skip_before_action :authenticate_account!, only: [ :show, :index ]
 
-  before_action :find_user, only: [ :new, :create, :edit, :update ]
+  before_action :find_user, only: [ :new, :create, :edit, :update, :myrooms ]
 
   def index
     @buildings = Building.all
@@ -12,10 +12,12 @@ class BuildingsController < ApplicationController
 
   def new
     @building = Building.new
+    @show_map = true
     5.times { @building.rooms.build }
   end
 
   def create
+    raise building_params.inspect
     @building = @user.buildings.build(building_params)
 
     if @building.save!
@@ -30,6 +32,16 @@ class BuildingsController < ApplicationController
   end
 
   def update
+  end
+
+  def myrooms
+    @buildings = Building.where(user_id: current_account.user.id)
+
+    if params[:extra] != nil
+      @right_rooms = Building.find(params[:extra]).rooms
+    else
+      @right_rooms = @buildings.first.rooms
+    end
   end
 
   private

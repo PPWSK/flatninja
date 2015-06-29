@@ -1,0 +1,2 @@
+module BuildingPicturesHelper
+end

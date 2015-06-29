@@ -1,0 +1,9 @@
+<%= simple_form_for([@user, @building, room, RoomPicture.new], html: { class: "form-horizontal", multipart: true }) do |f| %>
+  <%= f.error_notification %>
+
+  <%= f.file_field :file, required: true, label: false, input_html: { class: "my-selector" } %>
+  <%= f.input :file_type, collection: ["garden", "kitchen", "bathroom", "living room", "room for rent", "other"], label: false, required: true, input_html: { class: "my-selector" } %>
+
+  <%= f.button :submit, disabled: true, html: { id: "my-selector-button" }, :value => "add picture" %>
+
+<% end %>

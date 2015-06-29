@@ -32,9 +32,11 @@
   <%= render "shared/navbar" %>
   <%= render 'shared/notices' %>
 
+<% if @show_map %>
   <div class="surr-maps">
     <div id='gmaps-canvas'></div>
   </div>
+<% end %>
 
   <div class="container">
     <%= yield %>

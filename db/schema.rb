@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150625084348) do
+ActiveRecord::Schema.define(version: 20150629100450) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,20 @@ ActiveRecord::Schema.define(version: 20150625084348) do
   add_index "accounts", ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true, using: :btree
   add_index "accounts", ["user_id"], name: "index_accounts_on_user_id", using: :btree
 
+  create_table "building_pictures", force: :cascade do |t|
+    t.integer  "building_id"
+    t.string   "file"
+    t.string   "file_type"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
+  add_index "building_pictures", ["building_id"], name: "index_building_pictures_on_building_id", using: :btree
+
   create_table "buildings", force: :cascade do |t|
     t.string   "name"
     t.string   "building_type"
@@ -44,8 +58,6 @@ ActiveRecord::Schema.define(version: 20150625084348) do
     t.integer  "number_of_roommates"
     t.boolean  "garden",              default: false
     t.boolean  "balcony",             default: false
-    t.integer  "bathroom"
-    t.integer  "kitchen"
     t.boolean  "pets",                default: false
     t.boolean  "cleaning",            default: false
     t.boolean  "garage",              default: false
@@ -58,6 +70,20 @@ ActiveRecord::Schema.define(version: 20150625084348) do
   end
 
   add_index "buildings", ["user_id"], name: "index_buildings_on_user_id", using: :btree
+
+  create_table "room_pictures", force: :cascade do |t|
+    t.integer  "room_id"
+    t.string   "file"
+    t.string   "file_type"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.string   "file_file_name"
+    t.string   "file_content_type"
+    t.integer  "file_file_size"
+    t.datetime "file_updated_at"
+  end
+
+  add_index "room_pictures", ["room_id"], name: "index_room_pictures_on_room_id", using: :btree
 
   create_table "rooms", force: :cascade do |t|
     t.integer  "building_id"

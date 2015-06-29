@@ -42,7 +42,7 @@
           <li>Building: <%= b.name %>, from: <%= b.user.account.email %></li>
           <ul>
             <% b.rooms.each do |r| %>
-              <li><%= r.square_meter %></li>
+              <li><%= link_to r.optional_name + ": sqm: " + r.square_meter.to_s + ", price: " + r.price.to_s , edit_user_building_room_path(b.user, b, r) %></li>
             <% end %>
           </ul>
         <% end %>

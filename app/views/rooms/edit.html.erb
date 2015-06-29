@@ -1,2 +1,133 @@
-<h1>Rooms#edit</h1>
-<p>Find me in app/views/rooms/edit.html.erb</p>
+<div class="card">
+  <div class="card-image container" id="main-content">
+    <div class="row">
+
+      <% @room.room_pictures.each do |rpic| %>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 img-wrap">
+
+          <span class="close"><%= link_to ("<i class='fa fa-times fa-lg' style='color: white;'> </i>").html_safe, user_building_room_room_picture_path(@user, @building, @room, rpic), :method=> :delete %></span>
+          <%= image_tag rpic.file.url(:medium), class: "img-responsive" %>
+
+        </div>
+      <% end %>
+      <% if @room.room_pictures.size == 0 %>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+          <%= image_tag "empty.png", class: "img-responsive" %>
+        </div>
+      <% end %>
+    </div>
+
+    <span class="card-title"><%= render partial: 'room_pictures/new', locals: { room: @room } %></span>
+
+  </div>
+
+    <div class="card-content">
+
+      <%= simple_form_for([@user, @building, @room],  html: { novalidate: true, role: "form", class: "row" }, wrapper: :vertical_input_group ) do |r| %>
+
+        <!-- ROOMS FORM -->
+        <!-- <div class="card row"> -->
+          <div class="card-image col-sm-10 col-sm-offset-1">
+            <div class="row form-inputs">
+
+              <div class="col-sm-8">
+                <div class="row">
+                  <!-- TODO: optional name makes parameter not being sent -->
+                  <div class="col-sm-12">
+
+                    <%= r.input :optional_name, wrapper: :vertical_input_group, label: "Room name", class: 'optional_room_name', required: false do %>
+                      <%= r.input_field :optional_name, class: "form-control" %>
+                    <% end %>
+
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+                    <div class="">
+
+                      <%= r.input :price, wrapper: :vertical_input_group, label: "Price", required: true do %>
+                        <%= r.input_field :price, class: "form-control" %>
+                        <span class="input-group-addon">€</span>
+                      <% end %>
+
+                    </div>
+                  </div>
+                  <div class="col-sm-5 col-sm-offset-1">
+                    <div class="input-group">
+
+                      <%= r.input :square_meter, wrapper: :vertical_input_group, label: "Size", required: true do %>
+                        <%= r.input_field :square_meter, class: "form-control" %>
+                        <span class="input-group-addon">m<sup>2</sup></span>
+                      <% end %>
+
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-sm-6">
+
+                    <%= r.input :available_from, as: :date_picker, input_html: { data: {date_options: {defaultDate: Date.today, disabledDates: [Date.today - 700, Date.today.prev_day]}}}, label: 'Available from:', required: true %>
+
+                  </div>
+                  <div class="col-sm-5 col-sm-offset-1">
+                    <%= r.input :months_available, label: 'For', wrapper: :vertical_input_group, placeholder: "12 months", required: true %>
+                  </div>
+                </div>
+              </div>
+              <div class="col-sm-3 col-sm-offset-1">
+                <div class="row">
+                  <%= r.input :private_bathroom, label: 'Private bathroom?', as: :boolean, required: false %>
+                </div>
+                <div class="row">
+                  <%= r.input :private_kitchen, label: 'Private kitchen?', as: :boolean, required: false %>
+                </div>
+                <div class="row">
+                  <%= r.input :private_balcony, label: 'Private balcony?', as: :boolean, required: false %>
+                </div>
+                <div class="row">
+                  <%= r.input :private_garden, label: 'Private garden?', as: :boolean, required: false %>
+                </div>
+                <div class="row">
+                  <%= r.input :private_parking, label: 'Private parking?', as: :boolean, required: false %>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- <span class="card-title">Material Cards</span> -->
+          </div>
+
+        <% end %>
+
+    </div>
+
+    <div class="card-action">
+        <a href="#" target="new_blank">Link</a>
+        <a href="#" target="new_blank">Link</a>
+        <a href="#" target="new_blank">Link</a>
+        <a href="#" target="new_blank">Link</a>
+        <a href="#" target="new_blank">Link</a>
+    </div>
+</div>
+
+<!-- JQUERY SECTION -->
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(
+    function(){
+
+        $('input:file').change(
+            function(){
+                if ($(this).val()) {
+                    $('input:submit').attr('disabled',false);
+                    // or, as has been pointed out elsewhere:
+                    // $('input:submit').removeAttr('disabled');
+                } else {
+                    $('input:submit').attr('disabled',true);
+                }
+            }
+            );
+    });
+  <% end %>
+<% end %>

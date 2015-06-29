@@ -1,0 +1,43 @@
+#main-content{
+     min-height: 100%;
+    height: auto;
+
+}
+#main-content > .row {
+ overflow-x:scroll;
+     overflow-y:hidden;
+    white-space:nowrap;
+}
+#main-content > .row [class*="col-lg"], #main-content > .row [class*="col-md"], #main-content > .row [class*="col-sm"] {
+    float:none;
+    display:inline-block;
+}
+
+.img-wrap {
+    position: relative;
+    display: inline-block;
+    font-size: 0;
+}
+.img-wrap .close {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    z-index: 100;
+    padding: 5px 2px 2px;
+    opacity: .2;
+}
+.img-wrap:hover .close {
+    opacity: 1;
+}
+
+.my-selector {
+    font-size: 12px;
+    font-weight: 50;
+    text-transform: uppercase;
+    height: 30px;
+    width: 200px;
+}
+
+#my-selector-button {
+  width: 200px;
+}
