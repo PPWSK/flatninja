@@ -36,12 +36,22 @@ class RoomsController < ApplicationController
   end
 
   def destroy
-    if @room.destroy
-      flash[:notice] = "Room " + @room.optional_name + " was destroyed!"
-      redirect_to myrooms_user_buildings_path(@user, extra: @building.id)
+    if @room.building.rooms.size > 1
+      if @room.building.destroy
+        flash[:notice] = "Room " + @room.optional_name + " was destroyed!"
+        redirect_to myrooms_user_buildings_path(@user)
+      else
+        flash[:alert] = "Something went wrong, room not destroyed."
+        render :edit
+      end
     else
-      flash[:alert] = "Something went wrong, room not destroyed."
-      render :edit
+      if @room.destroy
+        flash[:notice] = "Room " + @room.optional_name + " was destroyed!"
+        redirect_to myrooms_user_buildings_path(@user, extra: @building.id)
+      else
+        flash[:alert] = "Something went wrong, room not destroyed."
+        render :edit
+      end
     end
   end
 
