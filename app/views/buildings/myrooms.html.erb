@@ -9,7 +9,7 @@
         <!-- building that is selected -->
 
         <div class="row">
-          <% if b.id == @right_rooms.first.building.id %>
+          <% if b.rooms.size > 0 && b.id == @right_rooms.first.building.id %>
 
             <div class="col-sm-2 vertic-div selected-color">
               <i class='fa fa-home fa-2x vertic-it' style=""></i>
@@ -20,7 +20,7 @@
 
           <!-- unselected -->
 
-          <% else %>
+          <% elsif b.rooms.size > 0 && b.id != @right_rooms.first.building.id %>
             <div class="col-sm-2">
               &nbsp;
             </div>
