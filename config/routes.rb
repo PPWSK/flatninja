@@ -9,6 +9,8 @@ Rails.application.routes.draw do
     resources :buildings, only: [ :new, :create, :edit, :update, :destroy ] do
       get 'myrooms', on: :collection
       resources :rooms, only: [ :new, :create, :edit, :update, :destroy ] do
+        get 'publish', on: :member
+        get 'unpublish', on: :member
         resources :room_pictures, only: [ :new, :create, :destroy ]
       end
     end

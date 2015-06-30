@@ -2,7 +2,7 @@ class RoomsController < ApplicationController
 
   before_action :find_user, except: [ :index ]
   before_action :find_building, except: [ :index ]
-  before_action :find_room, only: [ :show, :edit, :update ]
+  before_action :find_room, only: [ :show, :edit, :update, :publish, :unpublish, :destroy ]
 
   def new
   end
@@ -36,6 +36,45 @@ class RoomsController < ApplicationController
   end
 
   def destroy
+    if @room.destroy
+      flash[:notice] = "Room " + @room.optional_name + " was destroyed!"
+      redirect_to myrooms_user_buildings_path(@user, extra: @building.id)
+    else
+      flash[:alert] = "Something went wrong, room not destroyed."
+      render :edit
+    end
+  end
+
+  def publish
+    if @room.valid_room
+      @room.published_room = true
+      if @room.save
+        flash[:notice] = "Room " + @room.optional_name + " is now visible for users!"
+        redirect_to myrooms_user_buildings_path(@user, extra: @building.id)
+      else
+        flash[:alert] = "Something went wrong, room not published."
+        render :edit
+      end
+    else
+      flash[:alert] = "This is not a valid room! First Edit"
+      render :edit
+    end
+  end
+
+  def unpublish
+    if @room.published_room
+      @room.published_room = false
+      if @room.save
+        flash[:notice] = "You've unlisted room " + @room.optional_name + "!"
+        redirect_to myrooms_user_buildings_path(@user, extra: @building.id)
+      else
+        flash[:alert] = "Something went wrong, room not un-published."
+        render :edit
+      end
+    else
+      flash[:alert] = "This room wasn't published in the first place"
+      render :edit
+    end
   end
 
   def find_user

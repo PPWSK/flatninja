@@ -31,7 +31,6 @@
     <div class="row">
 
       <!-- ROOMS FORM -->
-      <!-- <div class="card row"> -->
       <div class="card-image col-sm-10 col-sm-offset-1">
         <div class="row form-inputs">
 
@@ -83,6 +82,15 @@
             </div>
           </div>
         </div>
+        <div class="row">
+          <% if room.published_room %>
+              <span><i class='fa fa-toggle-on fa-1x' style="color:green"></i>&nbsp;&nbsp;Room is published and visible for searchers</span>
+          <% elsif room.valid_room %>
+              <span><i class='fa fa-toggle-off fa-1x' style="color:orange"></i>&nbsp;&nbsp;Room is valid and ready for publishing</span>
+          <% else %>
+              <span><i class='fa fa-toggle-off fa-1x' style="color:red"></i>&nbsp;&nbsp;Room must be edited in order to be published...</span>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
@@ -99,7 +107,19 @@
 
       <!-- publish if room is valid -->
 
-      <%= link_to ("<i class='fa fa-share-square-o fa-1x'>&nbsp;&nbsp;Publish</i>").html_safe, edit_user_building_room_path(room.building.user, room.building, room) if room.valid_room %>
+      <% if room.published_room %>
+
+      <!-- un-publish -->
+
+        <%= link_to ("<i class='fa fa-share-square-o fa-1x card-action-negative'>&nbsp;&nbsp;Un-publish</i>").html_safe, unpublish_user_building_room_path(room.building.user, room.building, room), :confirm => "Are you sure? This room won't be visibile to users anymore..." if room.published_room %>
+
+      <% else %>
+
+        <!-- publish -->
+
+        <%= link_to ("<i class='fa fa-share-square-o fa-1x'>&nbsp;&nbsp;Publish</i>").html_safe, publish_user_building_room_path(room.building.user, room.building, room) if room.valid_room %>
+
+      <% end %>
 
     <!-- room is from someone else -->
 

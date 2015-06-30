@@ -50,6 +50,18 @@
   color: red;
 }
 
+.my-submit {
+  color: #ffab40;
+  margin-right: 16px;
+  transition: color 0.3s ease;
+  text-transform: uppercase;
+}
+
+.my-submit:hover {
+  color: #ffd8a6;
+  text-decoration: none;
+}
+
 .card .card-image span.card-title {
   position: absolute;
   bottom: 0;
@@ -82,5 +94,17 @@
 }
 .card .card-action a:hover {
   color: #ffd8a6;
+  text-decoration: none;
+}
+
+.card-action-negative {
+  color: #E8A58B;
+  margin-right: 16px;
+  transition: color 0.3s ease;
+  text-transform: uppercase;
+}
+
+.card-action-negative:hover {
+  color: #FF6A33;
   text-decoration: none;
 }

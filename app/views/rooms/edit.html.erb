@@ -25,13 +25,13 @@
 
   <div class="card-content">
     <div class="row">
+
       <!-- ROOMS FORM -->
-      <!-- <div class="card row"> -->
+
       <div class="card-image col-sm-10 col-sm-offset-1">
         <div class="row form-inputs">
           <div class="col-sm-8">
             <div class="row">
-              <!-- TODO: optional name makes parameter not being sent -->
               <div class="col-sm-12">
 
                 <%= r.input :optional_name, wrapper: :vertical_input_group, label: "Room name", class: 'optional_room_name', required: false do %>
@@ -91,16 +91,44 @@
             </div>
           </div>
         </div>
-        <!-- <span class="card-title">Material Cards</span> -->
       </div>
     </div>
   </div>
 
   <div class="card-action">
-    <%= r.submit "submit", value: "update" %>
-    <!-- TODO: add cancel & delete button, rebrand the buttons -->
+
+    <!-- submit -->
+
+    <%= r.button :submit, "update", class: "my-submit" %>
+
+    <!-- cancel -->
+
+    <%= link_to ("<i class='fa fa-undo fa-1x'>&nbsp;&nbsp;Cancel changes</i>").html_safe, myrooms_user_buildings_path(current_account.user.id, extra: @room.building) %>
+
+
+    <!-- publish / unpublish -->
+
+    <% if @room.published_room %>
+
+      <!-- un-publish -->
+
+      <%= link_to ("<i class='fa fa-share-square-o fa-1x card-action-negative'>&nbsp;&nbsp;Un-publish room</i>").html_safe, unpublish_user_building_room_path(@room.building.user, @room.building, @room), :confirm => "Are you sure? This room won't be visibile to users anymore..." if @room.published_room %>
+
+    <% else %>
+
+      <!-- publish -->
+
+      <%= link_to ("<i class='fa fa-share-square-o fa-1x'>&nbsp;&nbsp;Publish room</i>").html_safe, publish_user_building_room_path(@room.building.user, @room.building, @room) if @room.valid_room %>
+
+    <% end %>
+
+    <!-- delete room -->
+
+    <%= link_to ("<i class='fa fa-times fa-1x card-action-negative'>&nbsp;&nbsp;Delete room</i>").html_safe, user_building_room_path(@room.building.user, @room.building, @room), :method => :delete, :confirm => "Are you sure to delete this room?" %>
+
   </div>
 
+  <!-- end of form -->
   <% end %>
 
 </div>
