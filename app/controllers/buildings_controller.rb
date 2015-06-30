@@ -5,7 +5,7 @@ class BuildingsController < ApplicationController
 
   def index
     @buildings = Building.all
-    @rooms = Room.all
+    @rooms = Room.where(published_room: true)
   end
 
   def show
