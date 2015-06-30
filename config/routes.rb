@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   devise_for :accounts, :controllers => { :registrations => "registrations" }
 
-  resources :buildings, only: [ :new, :index, :show ]
+  resources :buildings, only: [ :index, :show ]
 
   resources :users, except: [ :index, :destroy ] do
     resources :buildings, only: [ :new, :create, :edit, :update, :destroy ] do
@@ -11,6 +11,9 @@ Rails.application.routes.draw do
       resources :rooms, only: [ :new, :create, :edit, :update, :destroy ] do
         resources :room_pictures, only: [ :new, :create, :destroy ]
       end
+    end
+    resources :buildings, only: [:show] do
+      resources :evaluations, only: [ :new, :create ]
     end
     resources :user_pictures, only: [ :new, :create, :destroy ]
   end

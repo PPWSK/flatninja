@@ -88,9 +88,21 @@
   </div>
 
   <div class="card-action">
+
+    <!-- room is from current account -->
+
     <% if account_signed_in? && current_account.user.present? && current_account.user == room.building.user %>
+
+      <!-- edit -->
+
       <%= link_to ("<i class='fa fa-pencil-square-o fa-1x'>&nbsp;&nbsp;Edit</i>").html_safe, edit_user_building_room_path(room.building.user, room.building, room) %>
-      <%= link_to ("<i class='fa fa-share-square-o fa-1x'>&nbsp;&nbsp;Publish</i>").html_safe, edit_user_building_room_path(room.building.user, room.building, room) %>
+
+      <!-- publish if room is valid -->
+
+      <%= link_to ("<i class='fa fa-share-square-o fa-1x'>&nbsp;&nbsp;Publish</i>").html_safe, edit_user_building_room_path(room.building.user, room.building, room) if room.valid_room %>
+
+    <!-- room is from someone else -->
+
     <% else %>
       <div class="row">
         <div class="col-sm-6 like-it">

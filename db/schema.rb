@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150629100450) do
+ActiveRecord::Schema.define(version: 20150630115639) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,17 @@ ActiveRecord::Schema.define(version: 20150629100450) do
 
   add_index "buildings", ["user_id"], name: "index_buildings_on_user_id", using: :btree
 
+  create_table "evaluations", force: :cascade do |t|
+    t.boolean  "status"
+    t.integer  "room_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "evaluations", ["room_id"], name: "index_evaluations_on_room_id", using: :btree
+  add_index "evaluations", ["user_id"], name: "index_evaluations_on_user_id", using: :btree
+
   create_table "room_pictures", force: :cascade do |t|
     t.integer  "room_id"
     t.string   "file"
@@ -87,6 +98,7 @@ ActiveRecord::Schema.define(version: 20150629100450) do
 
   create_table "rooms", force: :cascade do |t|
     t.integer  "building_id"
+    t.string   "optional_name"
     t.string   "price"
     t.date     "available_from"
     t.integer  "months_available"
@@ -96,7 +108,9 @@ ActiveRecord::Schema.define(version: 20150629100450) do
     t.boolean  "private_balcony"
     t.boolean  "private_garden"
     t.boolean  "private_parking"
-    t.string   "optional_name"
+    t.boolean  "furnished"
+    t.boolean  "valid_room"
+    t.boolean  "published_room"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
   end

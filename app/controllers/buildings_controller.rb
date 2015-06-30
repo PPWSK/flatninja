@@ -23,7 +23,7 @@ class BuildingsController < ApplicationController
     @building.rooms.each do |room|
       if room.price.present? && room.square_meter.present? &&
         room.optional_name.present? && room.available_from.present? &&
-        room.months_available.present?
+        room.months_available.present? && room.room_pictures.size > 2
         room.valid_room = true
       else
         room.valid_room = false
@@ -32,7 +32,7 @@ class BuildingsController < ApplicationController
 
     if @building.save!
       flash[:alert] = "Created #{@building.rooms.count} new rooms."
-      redirect_to buildings_path
+      redirect_to myrooms_user_buildings_path(current_account.user.id, extra: @building.id)
     else
       render :new
     end
@@ -50,7 +50,11 @@ class BuildingsController < ApplicationController
     if params[:extra] != nil
       @right_rooms = Building.find(params[:extra]).rooms
     else
-      @right_rooms = @buildings.first.rooms
+      if !@buildings.first.nil?
+        @right_rooms = @buildings.first.rooms
+      else
+        redirect_to new_user_building_path(current_account.user.id)
+      end
     end
   end
 

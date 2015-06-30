@@ -5,6 +5,8 @@
         Welcome
         <% if account_signed_in? && current_account.user.present? && current_account.user.valid? %>
           <%= current_account.user.first_name %>
+        <% else %>
+          , please sign up to like rooms!
         <% end %>
       </h1>
     </div>
@@ -12,7 +14,12 @@
   <div id="row">
     <div class="col-sm-12">
       <div class="row">
-        <%= render partial: 'rooms/show', locals: { local_room: @rooms.sample, local_user: @user } %>
+        <% room = @rooms.sample %>
+        <% if !room.nil? %>
+          <%= render partial: 'rooms/show', locals: { local_room: room, local_user: @user } %>
+        <% else %>
+          No rooms yet!
+        <% end %>
       </div>
     </div>
   </div>

@@ -18,9 +18,9 @@ class RoomsController < ApplicationController
 
   def update
 
-    if @room.price.present? && @room.square_meter.present? &&
-      @room.optional_name.present? && @room.available_from.present? &&
-      @room.months_available.present?
+    if !room_params[:price].empty? && !room_params[:square_meter].empty? &&
+      !room_params[:optional_name].empty? && !room_params[:available_from].empty? &&
+      !room_params[:months_available].empty? && @room.room_pictures.size > 2
       @room.valid_room = true
     else
       @room.valid_room = false
