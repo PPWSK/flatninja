@@ -10,5 +10,5 @@ users:
 
 - vadimpopowsky@gmail.com, 2 buildings, 4 rooms
 - vadim@flat-ninja.com, 1 building, 1 rooms
-- aa@aa.com, searcher
-- bb@bb.com, searcher
+- aa@aa.com, searcher, passw: aaaaaaaa
+- bb@bb.com, searcher, passw: bbbbbbbb
