@@ -1,5 +1,6 @@
 class Room < ActiveRecord::Base
   belongs_to :building
+  has_many :evaluations
   before_validation :assign_default_name
 
   has_many :room_pictures, dependent: :destroy

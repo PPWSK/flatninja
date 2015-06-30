@@ -20,6 +20,16 @@ class BuildingsController < ApplicationController
   def create
     @building = @user.buildings.build(building_params)
 
+    @building.rooms.each do |room|
+      if room.price.present? && room.square_meter.present? &&
+        room.optional_name.present? && room.available_from.present? &&
+        room.months_available.present?
+        room.valid_room = true
+      else
+        room.valid_room = false
+      end
+    end
+
     if @building.save!
       flash[:alert] = "Created #{@building.rooms.count} new rooms."
       redirect_to buildings_path

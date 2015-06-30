@@ -4,9 +4,11 @@
 
 .card {
   margin-top: 10px;
+  margin-bottom: 20px;
   box-sizing: border-box;
   border-radius: 2px;
   background-clip: padding-box;
+  background: #F0F0F0;
 }
 .card span.card-title-form {
     color: #fff;
@@ -24,20 +26,36 @@
 .card .card-image {
   position: relative;
   overflow: hidden;
-  margin-top: 2%;
-  margin-bottom: 2%;
+  // margin-top: 2%;
+  // margin-bottom: 2%;
 }
 .card .card-image img {
-  border-radius: 2px 2px 0 0;
+  // border-radius: 2px 2px 0 0;
   background-clip: padding-box;
   position: relative;
-  z-index: -1;
+  z-index: 1;
 }
+
+.card .card-image strong {
+  display: inline-block;
+  width: 50%;
+}
+
+.missing:before {
+  color: red;
+  content: '___';
+}
+
+.missing {
+  color: red;
+}
+
 .card .card-image span.card-title {
   position: absolute;
   bottom: 0;
   left: 0;
   padding: 16px;
+  z-index: 2;
 }
 .card .card-content {
   padding: 16px;

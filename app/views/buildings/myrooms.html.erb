@@ -10,10 +10,10 @@
         <div class="row">
           <% if b.id == @right_rooms.first.building.id %>
 
-            <div class="col-sm-2 vertic-div">
+            <div class="col-sm-2 vertic-div white-font">
               <i class='fa fa-home fa-2x vertic-it' style=""></i>
             </div>
-            <div class="col-sm-10 building-item-selected">
+            <div class="col-sm-10 building-item-selected white-font">
               <p class='building-item-title vertic-it'><strong><%= b.name %></strong></p><p>(&nbsp;<%= b.rooms.count.to_s %>&nbsp;rooms)</p>
             </div>
 

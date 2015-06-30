@@ -17,7 +17,7 @@
   margin-bottom: 5%;
   padding-left: 10px;
   border-right: 1px solid $gray-light;
-  border-radius: 6px;
+  // border-radius: 6px;
 }
 
 .building-item-selected {
@@ -26,7 +26,11 @@
   padding-left: 10px;
   padding-right: 10px;
   border-right: 3px solid $gray;
-  border-radius: 6px;
+  // border-radius: 6px;
+}
+
+.white-font {
+  color: $gray;
 }
 
 .vertic-div {

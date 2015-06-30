@@ -4,6 +4,7 @@ class CreateRooms < ActiveRecord::Migration
 
       t.references :building, index: true
 
+      t.string :optional_name
       t.string :price
       t.date :available_from
       t.integer :months_available
@@ -13,7 +14,9 @@ class CreateRooms < ActiveRecord::Migration
       t.boolean :private_balcony
       t.boolean :private_garden
       t.boolean :private_parking
-      t.string :optional_name
+      t.boolean :furnished
+      t.boolean :valid_room
+      t.boolean :published_room
 
       t.timestamps null: false
     end

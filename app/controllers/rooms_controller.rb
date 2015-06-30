@@ -17,6 +17,15 @@ class RoomsController < ApplicationController
   end
 
   def update
+
+    if @room.price.present? && @room.square_meter.present? &&
+      @room.optional_name.present? && @room.available_from.present? &&
+      @room.months_available.present?
+      @room.valid_room = true
+    else
+      @room.valid_room = false
+    end
+
     if @room.update(room_params)
       flash[:notice] = "Room updated"
       redirect_to myrooms_user_buildings_path(current_account.user.id, extra: @building.id)

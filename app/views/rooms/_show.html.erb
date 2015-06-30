@@ -29,41 +29,36 @@
 
   <div class="card-content">
     <div class="row">
+
       <!-- ROOMS FORM -->
       <!-- <div class="card row"> -->
       <div class="card-image col-sm-10 col-sm-offset-1">
         <div class="row form-inputs">
-          <div class="col-sm-8">
+
+          <!-- price & availabilities -->
+
+          <div class="col-sm-7">
             <div class="row">
-              <div class="col-sm-6">
-                <div class="">
-
-                  <%= room.price %>
-
-                </div>
-              </div>
-              <div class="col-sm-5 col-sm-offset-1">
-                <div class="input-group">
-
-                  <%= room.square_meter %>
-
-                </div>
-              </div>
+              <strong>Price:</strong>
+              <span class="<%= 'missing' if !room.price.present? %>"><%= room.price %>&nbsp;Eur / month</span>
             </div>
             <div class="row">
-              <div class="col-sm-6">
-
-                <%= room.available_from %>
-
-              </div>
-              <div class="col-sm-5 col-sm-offset-1">
-
-                <%= room.months_available %>
-
-              </div>
+              <strong>Surface:</strong>
+              <span class="<%= 'missing' if !room.square_meter.present? %>"><%= room.square_meter.to_s %>&nbsp;Sqm</span>
+            </div>
+            <div class="row">
+              <strong>Available from:</strong>
+              <span class="<%= 'missing' if !room.available_from.present? %>"><%= room.available_from %>&nbsp;</span>
+            </div>
+            <div class="row">
+              <strong>For maximum:</strong>
+              <span class="<%= 'missing' if !room.months_available.present? %>"><%= room.months_available %>&nbsp;months</span>
             </div>
           </div>
-          <div class="col-sm-3 col-sm-offset-1">
+
+          <!-- attributes -->
+
+          <div class="col-sm-4 col-sm-offset-1">
             <div class="row">
 
               <%= room.private_bathroom ? ("<i class='fa fa-check fa-1x' style='color: green;'></i>").html_safe : ("<i class='fa fa-times fa-1x' style='color: black;'></i> No").html_safe %>
@@ -94,8 +89,8 @@
 
   <div class="card-action">
     <% if account_signed_in? && current_account.user.present? && current_account.user == room.building.user %>
-      <%= link_to "Edit" , edit_user_building_room_path(room.building.user, room.building, room) %>
-      <%= link_to "Publish" , edit_user_building_room_path(room.building.user, room.building, room) %>
+      <%= link_to ("<i class='fa fa-pencil-square-o fa-1x'>&nbsp;&nbsp;Edit</i>").html_safe, edit_user_building_room_path(room.building.user, room.building, room) %>
+      <%= link_to ("<i class='fa fa-share-square-o fa-1x'>&nbsp;&nbsp;Publish</i>").html_safe, edit_user_building_room_path(room.building.user, room.building, room) %>
     <% else %>
       <div class="row">
         <div class="col-sm-6 like-it">
