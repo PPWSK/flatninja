@@ -3,19 +3,37 @@
 
     <!-- building list -->
 
-    <div class="col-sm-4 building-menu">
+    <div class="col-sm-3 building-menu">
       <% @buildings.each do |b| %>
-        <div class="row building-item">
 
-          <%= link_to ("<p class='building-item-title'>" + b.name + "</p><p>" + b.location + "</p>").html_safe, myrooms_user_buildings_path(current_account.user.id, extra: b.id) %>
+        <!-- building that is selected -->
+        <div class="row">
+          <% if b.id == @right_rooms.first.building.id %>
 
+            <div class="col-sm-2 vertic-div">
+              <i class='fa fa-home fa-2x vertic-it' style=""></i>
+            </div>
+            <div class="col-sm-10 building-item-selected">
+              <p class='building-item-title vertic-it'><strong><%= b.name %></strong></p><p>(&nbsp;<%= b.rooms.count.to_s %>&nbsp;rooms)</p>
+            </div>
+
+          <!-- unselected -->
+
+          <% else %>
+            <div class="col-sm-2">
+              &nbsp;
+            </div>
+            <div class="col-sm-10 building-item">
+              <%= link_to ("<p class='building-item-title'>" + b.name + "</p><p>(" + b.rooms.count.to_s + " rooms)</p>").html_safe, myrooms_user_buildings_path(current_account.user.id, extra: b.id) %>
+            </div>
+          <% end %>
         </div>
       <% end %>
     </div>
 
     <!-- rooms per building -->
 
-    <div class="col-sm-8">
+    <div class="col-sm-8 col-sm-offset-1">
       <% @right_rooms.each do |r| %>
         <div class="row">
           <%= render partial: 'rooms/show', locals: { local_room: r, local_user: @user } %>

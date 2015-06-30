@@ -66,20 +66,25 @@
           <div class="col-sm-3 col-sm-offset-1">
             <div class="row">
 
-              <%= room.private_bathroom ? "Private Bathroom" : "No Private Bathroom" %>
+              <%= room.private_bathroom ? ("<i class='fa fa-check fa-1x' style='color: green;'></i>").html_safe : ("<i class='fa fa-times fa-1x' style='color: black;'></i> No").html_safe %>
+              Private Bathroom
 
             </div>
             <div class="row">
-              <%= room.private_kitchen ? "Private Kitchen" : "No Private Kitchen" %>
+              <%= room.private_kitchen ? ("<i class='fa fa-check fa-1x' style='color: green;'></i>").html_safe : ("<i class='fa fa-times fa-1x' style='color: black;'></i> No").html_safe %>
+              Private Kitchen
             </div>
             <div class="row">
-              <%= room.private_balcony ? "Private Balcony" : "No Private Balcony" %>
+              <%= room.private_balcony ? ("<i class='fa fa-check fa-1x' style='color: green;'></i>").html_safe : ("<i class='fa fa-times fa-1x' style='color: black;'></i> No").html_safe %>
+              Private Balcony
             </div>
             <div class="row">
-              <%= room.private_garden ? "Private Garden" : "No Private Garden" %>
+              <%= room.private_garden ? ("<i class='fa fa-check fa-1x' style='color: green;'></i>").html_safe : ("<i class='fa fa-times fa-1x' style='color: black;'></i> No").html_safe %>
+              Private Garden
             </div>
             <div class="row">
-              <%= room.private_parking ? "Private Parking" : "No Private Parking" %>
+              <%= room.private_parking ? ("<i class='fa fa-check fa-1x' style='color: green;'></i>").html_safe : ("<i class='fa fa-times fa-1x' style='color: black;'></i> No").html_safe %>
+              Private Parking
             </div>
           </div>
         </div>
