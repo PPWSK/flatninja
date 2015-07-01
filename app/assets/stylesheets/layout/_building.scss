@@ -203,3 +203,30 @@
     background-color: lighten($navbar-btn-bg, 20%);
   }
 }
+
+
+.aside {
+  height: 100%;
+  background : blue;
+  position : absolute;
+  left: 0;
+  top : 0;
+  width : 200px;
+  display: block;
+  z-index : 1000;
+
+  -webkit-transition : -webkit-transform 1s;
+     -moz-transition : -moz-transform 1s;
+      -ms-transition : -ms-transform 1s;
+       -o-transition : -o-transform 1s;
+          transition : transform 1s;
+
+
+  -webkit-transform : translateX(0);
+          transform : translateX(0);
+
+}
+.slideMenuLeft {
+  -webkit-transform : translateX(-100%);
+          transform : translateX(-100%);
+}

@@ -11,16 +11,15 @@
 
   <!-- ROOM IMAGES SECTION -->
 
-  <div class="card-image" id="main-content">
+  <div class="card-image">
     <div class="row">
-
-      <% room.room_pictures.each do |rpic| %>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12 img-wrap">
-
+      <div class="owl-carousel">
+        <% room.room_pictures.each do |rpic| %>
           <%= image_tag rpic.file.url(:medium), class: "img-responsive" %>
+        <% end %>
+      </div>
 
-        </div>
-      <% end %>
+
       <% if room.room_pictures.size == 0 %>
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
           <%= image_tag "empty.png", class: "img-responsive" %>
@@ -89,36 +88,31 @@
     </div>
   </div>
 
-  <!-- LIKE/DISLIKE SECTION -->
-
+  <!-- LIKE/DISLIKE - ON SIDE - SECTION -->
+<!--
   <div>
-    <!-- user signed in -->
-    <% if account_signed_in? && current_account.user.present? %>
-    <!-- room is from current account -->
-    <% if current_account.user != room.building.user %>
+
+    if account_signed_in? && current_account.user.present?
+
+    if current_account.user != room.building.user
 
     <div class="row">
       <div class="col-sm-12">
 
-      <!-- positive evaluation -->
+
+      link_to ("<i class='fa fa-heart fa-4x left-heart'></i>").html_safe,  user_building_room_evaluations_path(current_account.user, room.building, room, eval: true), method: :post
 
 
-      <%= link_to ("<i class='fa fa-heart fa-4x left-heart'></i>").html_safe,  user_building_room_evaluations_path(current_account.user, room.building, room, eval: true), method: :post %>
 
-     <!--  </div>
-      <div class="col-sm-6"> -->
-
-      <!-- negative evaluation -->
-
-      <%= link_to ("<i class='fa fa-times fa-4x x-right'></i>").html_safe,  user_building_room_evaluations_path(current_account.user, room.building, room, eval: false), method: :post %>
+      link_to ("<i class='fa fa-times fa-4x x-right'></i>").html_safe,  user_building_room_evaluations_path(current_account.user, room.building, room, eval: false), method: :post
 
       </div>
 
-    <% end %>
-    <% end %>
+    end
+     end
     </div>
   </div>
-
+ -->
   <!-- ROOMMATES SECTION -->
 
   <div class="card-content">
@@ -140,7 +134,7 @@
   <!-- MAPS SECTION -->
 
   <div class="card-image">
-    <div id="map" style="width: 100%; height: 100px;"></div>
+    <div id="map<%= room.id %>" style="width: 100%; height: 100px;"></div>
   </div>
 
   <!-- ACTIONS SECTION -->
@@ -223,9 +217,17 @@
 
 <% content_for(:after_js) do %>
   <%= javascript_tag do %>
+
+    $('.owl-carousel').owlCarousel({
+        margin:10,
+        loop:true,
+        autoWidth:true,
+        items:4
+    })
+
     $(document).on('ready', function() {
-      handler = Gmaps.build('Google');
-      handler.buildMap({ internal: { id: 'map' } }, function(){
+      var handler = Gmaps.build('Google');
+      handler.buildMap({ internal: { id: 'map<%= room.id %>' } }, function(){
         markers = handler.addMarkers(<%= raw @markers.to_json %>);
         handler.bounds.extendWith(markers);
         handler.fitMapToBounds();

@@ -1,6 +1,21 @@
 <div class="container-fluid">
+
+  <div class="aside slideMenuLeft">
+    <ul>
+      <li>aaaa</li>
+      <li>aaaa</li>
+      <li>aaaa</li>
+      <li>aaaa</li>
+      <li>aaaa</li>
+      <li>aaaa</li>
+    </ul>
+  </div>
+
+
+
   <div class="row">
     <div class="col-sm-10 col-offset-2">
+
       <h1>
         Welcome
         <% if account_signed_in? && current_account.user.present? && current_account.user.valid? %>
@@ -9,6 +24,7 @@
           , please sign up to like rooms!
         <% end %>
       </h1>
+
     </div>
   </div>
   <div class="row">
@@ -45,6 +61,21 @@
         <% end %>
       <% end %>
 
+       <div id='toggleAside'>Toggle</div>
+
     </div>
   </div>
 </div>
+
+<!-- JQUERY SECTION -->
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).ready(
+    function(){
+        $("#toggleAside").click(function(){
+         $(".aside").toggleClass("slideMenuLeft");
+        })
+    });
+  <% end %>
+<% end %>
