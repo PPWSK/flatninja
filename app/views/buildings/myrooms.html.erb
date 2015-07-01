@@ -1,35 +1,48 @@
 <% if account_signed_in? && current_account.user.present? && current_account.user.valid? %>
   <div class="row">
 
-    <!-- building list -->
+    <!-- BUILDING LIST SECTION -->
 
     <div class="col-sm-3 building-menu">
+
+      <!-- ADD A ROOM SECTION -->
+
+      <div class="row">
+        <div class="col-sm-12">
+          <%= link_to ("<span class='add-room-button'>Add a room</span>").html_safe, "#" %>
+          <br><br>
+        </div>
+      </div>
+
+      <!-- BUILDING LIST -->
+
       <% @buildings.each do |b| %>
 
         <!-- building that is selected -->
 
-        <div class="row">
-          <% if b.rooms.size > 0 && b.id == @right_rooms.first.building.id %>
+      <div class="row">
+        <% if b.rooms.size > 0 && b.id == @right_rooms.first.building.id %>
 
-            <div class="col-sm-2 vertic-div selected-color">
-              <i class='fa fa-home fa-2x vertic-it' style=""></i>
-            </div>
-            <div class="col-sm-10 building-item-selected selected-color">
-              <p class='building-item-title vertic-it'><strong><%= b.name %></strong></p><p>(&nbsp;<%= b.rooms.count.to_s %>&nbsp;rooms)</p>
-            </div>
+          <div class="col-sm-2 vertic-div selected-color">
+            <i class='fa fa-home fa-2x vertic-it'></i>
+          </div>
+          <div class="col-sm-10 building-item-selected selected-color">
+            <p class='building-item-title vertic-it'><strong><%= b.name %></strong></p><p>(&nbsp;<%= b.rooms.count.to_s %>&nbsp;rooms)</p>
+          </div>
 
-          <!-- unselected -->
+        <!-- unselected -->
 
-          <% elsif b.rooms.size > 0 && b.id != @right_rooms.first.building.id %>
-            <div class="col-sm-2">
-              &nbsp;
-            </div>
-            <div class="col-sm-10 building-item">
-              <%= link_to ("<p class='building-item-title link-color'>" + b.name + "</p><p class='link-color'>(" + b.rooms.count.to_s + " rooms)</p>").html_safe, myrooms_user_buildings_path(current_account.user.id, extra: b.id) %>
-            </div>
-          <% end %>
-        </div>
+        <% elsif b.rooms.size > 0 && b.id != @right_rooms.first.building.id %>
+          <div class="col-sm-2">
+            &nbsp;
+          </div>
+          <div class="col-sm-10 building-item">
+            <%= link_to ("<p class='building-item-title link-color'>" + b.name + "</p><p class='link-color'>(" + b.rooms.count.to_s + " rooms)</p>").html_safe, myrooms_user_buildings_path(current_account.user.id, extra: b.id) %>
+          </div>
+        <% end %>
+      </div>
       <% end %>
+
     </div>
 
     <!-- rooms per building -->

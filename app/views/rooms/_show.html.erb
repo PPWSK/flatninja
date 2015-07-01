@@ -1,3 +1,5 @@
+<!-- TODO: SEPERATE EDIT AND INDEX SHOW ROOM -->
+
 <% if local_assigns.has_key? :local_room %>
   <% room = local_room %>
 <% end %>
@@ -6,6 +8,9 @@
 <% end %>
 
 <div class="card">
+
+  <!-- ROOM IMAGES SECTION -->
+
   <div class="card-image" id="main-content">
     <div class="row">
 
@@ -27,79 +32,118 @@
 
   </div>
 
+  <!-- ROOM DETAILS SECTION -->
+
   <div class="card-content">
     <div class="row">
-
-      <!-- ROOMS FORM -->
       <div class="card-image col-sm-10 col-sm-offset-1">
-        <div class="row form-inputs">
 
-          <!-- price & availabilities -->
+        <!-- price & availabilities -->
 
-          <div class="col-sm-7">
-            <div class="row">
-              <strong>Price:</strong>
-              <span class="<%= 'missing' if !room.price.present? %>"><%= room.price %>&nbsp;Eur / month</span>
-            </div>
-            <div class="row">
-              <strong>Surface:</strong>
-              <span class="<%= 'missing' if !room.square_meter.present? %>"><%= room.square_meter.to_s %>&nbsp;Sqm</span>
-            </div>
-            <div class="row">
-              <strong>Available from:</strong>
-              <span class="<%= 'missing' if !room.available_from.present? %>"><%= room.available_from %>&nbsp;</span>
-            </div>
-            <div class="row">
-              <strong>For maximum:</strong>
-              <span class="<%= 'missing' if !room.months_available.present? %>"><%= room.months_available %>&nbsp;months</span>
-            </div>
+        <div class="col-sm-6">
+          <div class="row">
+            <strong>Price:</strong>
+            <span class="<%= 'missing' if !room.price.present? %>"><%= room.price %>&nbsp;Eur / month</span>
           </div>
-
-          <!-- attributes -->
-
-          <div class="col-sm-4 col-sm-offset-1">
-            <div class="row">
-
-              <%= room.private_bathroom ? ("<i class='fa fa-check fa-1x' style='color: green;'></i>").html_safe : ("<i class='fa fa-times fa-1x' style='color: black;'></i> No").html_safe %>
-              Private Bathroom
-
-            </div>
-            <div class="row">
-              <%= room.private_kitchen ? ("<i class='fa fa-check fa-1x' style='color: green;'></i>").html_safe : ("<i class='fa fa-times fa-1x' style='color: black;'></i> No").html_safe %>
-              Private Kitchen
-            </div>
-            <div class="row">
-              <%= room.private_balcony ? ("<i class='fa fa-check fa-1x' style='color: green;'></i>").html_safe : ("<i class='fa fa-times fa-1x' style='color: black;'></i> No").html_safe %>
-              Private Balcony
-            </div>
-            <div class="row">
-              <%= room.private_garden ? ("<i class='fa fa-check fa-1x' style='color: green;'></i>").html_safe : ("<i class='fa fa-times fa-1x' style='color: black;'></i> No").html_safe %>
-              Private Garden
-            </div>
-            <div class="row">
-              <%= room.private_parking ? ("<i class='fa fa-check fa-1x' style='color: green;'></i>").html_safe : ("<i class='fa fa-times fa-1x' style='color: black;'></i> No").html_safe %>
-              Private Parking
-            </div>
+          <div class="row">
+            <strong>Surface:</strong>
+            <span class="<%= 'missing' if !room.square_meter.present? %>"><%= room.square_meter.to_s %>&nbsp;Sqm</span>
+          </div>
+          <div class="row">
+            <strong>Available from:</strong>
+            <span class="<%= 'missing' if !room.available_from.present? %>"><%= room.available_from %>&nbsp;</span>
+          </div>
+          <div class="row">
+            <strong>For maximum:</strong>
+            <span class="<%= 'missing' if !room.months_available.present? %>"><%= room.months_available %>&nbsp;months</span>
           </div>
         </div>
-        <% if account_signed_in? && current_account.user.present? && current_account.user == room.building.user %>
-        <div class="row">
-          <% if room.published_room %>
-              <span><i class='fa fa-toggle-on fa-1x' style="color:green"></i>&nbsp;&nbsp;Room is published and visible for searchers</span>
-          <% elsif room.valid_room %>
-              <span><i class='fa fa-toggle-off fa-1x' style="color:orange"></i>&nbsp;&nbsp;Room is valid and ready for publishing</span>
-          <% else %>
-              <span><i class='fa fa-toggle-off fa-1x' style="color:red"></i>&nbsp;&nbsp;Room must be edited in order to be published...</span>
-          <% end %>
+
+        <!-- attributes -->
+
+        <div class="col-sm-5 col-sm-offset-1">
+          <div class="row">
+
+            <%= room.private_bathroom ? ("<i class='fa fa-check fa-1x' style='color: green;'></i>").html_safe : ("<i class='fa fa-times fa-1x' style='color: black;'></i> No").html_safe %>
+            Private Bathroom
+
+          </div>
+          <div class="row">
+            <%= room.private_kitchen ? ("<i class='fa fa-check fa-1x' style='color: green;'></i>").html_safe : ("<i class='fa fa-times fa-1x' style='color: black;'></i> No").html_safe %>
+            Private Kitchen
+          </div>
+          <div class="row">
+            <%= room.private_balcony ? ("<i class='fa fa-check fa-1x' style='color: green;'></i>").html_safe : ("<i class='fa fa-times fa-1x' style='color: black;'></i> No").html_safe %>
+            Private Balcony
+          </div>
+          <div class="row">
+            <%= room.private_garden ? ("<i class='fa fa-check fa-1x' style='color: green;'></i>").html_safe : ("<i class='fa fa-times fa-1x' style='color: black;'></i> No").html_safe %>
+            Private Garden
+          </div>
+          <div class="row">
+            <%= room.private_parking ? ("<i class='fa fa-check fa-1x' style='color: green;'></i>").html_safe : ("<i class='fa fa-times fa-1x' style='color: black;'></i> No").html_safe %>
+            Private Parking
+          </div>
         </div>
-        <% end %>
       </div>
     </div>
   </div>
 
+  <!-- LIKE/DISLIKE SECTION -->
+
+  <div>
+    <!-- user signed in -->
+    <% if account_signed_in? && current_account.user.present? %>
+    <!-- room is from current account -->
+    <% if current_account.user != room.building.user %>
+
+    <div class="row">
+      <div class="col-sm-12">
+
+      <!-- positive evaluation -->
+
+
+      <%= link_to ("<i class='fa fa-heart fa-4x left-heart'></i>").html_safe,  user_building_room_evaluations_path(current_account.user, room.building, room, eval: true), method: :post %>
+
+     <!--  </div>
+      <div class="col-sm-6"> -->
+
+      <!-- negative evaluation -->
+
+      <%= link_to ("<i class='fa fa-times fa-4x x-right'></i>").html_safe,  user_building_room_evaluations_path(current_account.user, room.building, room, eval: false), method: :post %>
+
+      </div>
+
+    <% end %>
+    <% end %>
+    </div>
+  </div>
+
+  <!-- ROOMMATES SECTION -->
+
+  <div class="card-content">
+    <div class="row">
+      <div class="col-sm-10 col-sm-offset-1">
+      <%= image_tag room.building.user.user_pictures.first.file.url(:thumb), class: "img-avatar2" %>
+      <span class="img-avatar2-span">&nbsp;</span>
+      <span><b><%= room.building.user.first_name %></b>
+        <% mates = room.building.number_of_roommates.size - 1 %>
+        <b><% if mates == 1 %>
+          + 1 other
+        <% elsif mates >= 2 %>
+          + <%= mates.to_s %> others
+        <% end %></b></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAPS SECTION -->
+
   <div class="card-image">
     <div id="map" style="width: 100%; height: 100px;"></div>
   </div>
+
+  <!-- ACTIONS SECTION -->
 
   <div class="card-action">
 
@@ -163,6 +207,17 @@
     </div>
 
   <% end %>
+
+  <% if account_signed_in? && current_account.user.present? && current_account.user == room.building.user %>
+      <% if room.published_room %>
+          <span class="valid-span"><i class='fa fa-toggle-on fa-1x' style="color:green"></i>&nbsp;&nbsp;Room is published and visible for searchers</span>
+      <% elsif room.valid_room %>
+          <span class="valid-span"><i class='fa fa-toggle-off fa-1x' style="color:orange"></i>&nbsp;&nbsp;Room is valid and ready for publishing</span>
+      <% else %>
+          <span class="valid-span"><i class='fa fa-toggle-off fa-1x' style="color:red"></i>&nbsp;&nbsp;Room must be edited in order to be published...</span>
+      <% end %>
+    <% end %>
+
   </div>
 </div>
 

@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-8 col-offset-2">
+    <div class="col-sm-10 col-offset-2">
       <h1>
         Welcome
         <% if account_signed_in? && current_account.user.present? && current_account.user.valid? %>
@@ -15,13 +15,13 @@
     <div class="col-sm-8">
 
       <% if @all_rooms.size <= 0 %>
-        no rooms yet... wait for new offers!
+        <br>no rooms yet... wait for new offers!
       <% elsif @new_rooms.size <= 0 %>
-        No more new rooms!
+        <br>No more new rooms!
         <%= link_to "Reset?", destroy_evals_user_path(current_account.user) %>
 
       <% else %>
-        <%= @new_rooms.size.to_s %> new rooms:
+        <br><%= @new_rooms.size.to_s %> new rooms:
         <% if !@new_room.nil? %>
           <div class="row">
           <%= render partial: 'rooms/show', locals: { local_room: @new_room, local_user: @user } %>
@@ -34,12 +34,14 @@
     </div>
     <div class="col-sm-3 col-sm-offset-1">
 
-      <%= @liked_rooms.size.to_s %> liked rooms:
+      <br><%= @liked_rooms.size.to_s %> liked rooms:
       <% if @liked_rooms.size > 0 %>
         <% @liked_rooms.each do |lr| %>
+          <% if !lr.nil? %>
           <div class="row">
             <%= render partial: 'rooms/small_show', locals: { local_room: lr, local_user: @user } %>
           </div>
+          <% end %>
         <% end %>
       <% end %>
 

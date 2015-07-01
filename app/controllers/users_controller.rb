@@ -26,7 +26,6 @@ class UsersController < ApplicationController
 
   def update
     if @user.update(user_params)
-      flash[:notice] = "User Profile updated"
       redirect_to buildings_path
     else
       flash[:alert] = "Error, not updated!"

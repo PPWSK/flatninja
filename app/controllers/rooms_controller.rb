@@ -27,7 +27,6 @@ class RoomsController < ApplicationController
     end
 
     if @room.update(room_params)
-      flash[:notice] = "Room updated"
       redirect_to myrooms_user_buildings_path(current_account.user.id, extra: @building.id)
     else
       flash[:alert] = "Error, room not updated!"
@@ -59,7 +58,6 @@ class RoomsController < ApplicationController
     if @room.valid_room
       @room.published_room = true
       if @room.save
-        flash[:notice] = "Room " + @room.optional_name + " is now visible for users!"
         redirect_to myrooms_user_buildings_path(@user, extra: @building.id)
       else
         flash[:alert] = "Something went wrong, room not published."
@@ -75,7 +73,6 @@ class RoomsController < ApplicationController
     if @room.published_room
       @room.published_room = false
       if @room.save
-        flash[:notice] = "You've unlisted room " + @room.optional_name + "!"
         redirect_to myrooms_user_buildings_path(@user, extra: @building.id)
       else
         flash[:alert] = "Something went wrong, room not un-published."
