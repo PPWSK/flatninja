@@ -22,10 +22,9 @@
 
       <% else %>
         <%= @new_rooms.size.to_s %> new rooms:
-        <% room = @new_rooms.sample %>
-        <% if !room.nil? %>
+        <% if !@new_room.nil? %>
           <div class="row">
-          <%= render partial: 'rooms/show', locals: { local_room: room, local_user: @user } %>
+          <%= render partial: 'rooms/show', locals: { local_room: @new_room, local_user: @user } %>
           </div>
         <% else %>
           something wrong with the room...
@@ -39,7 +38,7 @@
       <% if @liked_rooms.size > 0 %>
         <% @liked_rooms.each do |lr| %>
           <div class="row">
-            <%= render partial: 'rooms/show', locals: { local_room: lr, local_user: @user } %>
+            <%= render partial: 'rooms/small_show', locals: { local_room: lr, local_user: @user } %>
           </div>
         <% end %>
       <% end %>

@@ -7,7 +7,7 @@ class EvaluationsController < ApplicationController
       status: params[:eval])
 
     if @evaluation.save
-      flash[:notice] = "you have " + (@evaluation.status ? 'liked' : 'disliked') + " prior room!"
+      # flash[:notice] = "you have " + (@evaluation.status ? 'liked' : 'disliked') + " prior room!"
       redirect_to root_path
     else
       flash[:alert] = "something went wrong, status: " + params[:eval].to_s

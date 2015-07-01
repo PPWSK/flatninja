@@ -1,0 +1,51 @@
+<% if local_assigns.has_key? :local_room %>
+  <% room = local_room %>
+<% end %>
+<% if local_assigns.has_key? :local_user %>
+  <% user = local_user %>
+<% end %>
+
+<div class="card">
+  <div class="card-image">
+    <div class="row">
+
+      <% room.room_pictures.each_with_index do |rpic, i| %>
+        <% if i < 4 %>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+
+          <%= image_tag rpic.file.url(:thumb), class: "img-responsive" %>
+
+        </div>
+        <% end %>
+      <% end %>
+      <% if room.room_pictures.size == 0 %>
+        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+          <%= image_tag "empty.png", class: "img-responsive" %>
+        </div>
+      <% end %>
+    </div>
+
+  </div>
+
+  <div class="card-content">
+    <div class="row">
+
+      <!-- ROOMS FORM -->
+      <div class="card-image col-sm-10 col-sm-offset-1">
+        <div class="row other-title">
+          <b><%= room.optional_name %></b>
+        </div>
+        <div class="row">
+          <b>Price:</b>
+          <span class="<%= 'missing' if !room.price.present? %>"><%= room.price %>&nbsp;Eur / month</span>
+        </div>
+        <div class="row">
+          <b>Surface:</b>
+          <span class="<%= 'missing' if !room.square_meter.present? %>"><%= room.square_meter.to_s %>&nbsp;Sqm</span>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>

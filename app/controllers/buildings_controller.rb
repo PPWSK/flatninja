@@ -7,18 +7,32 @@ class BuildingsController < ApplicationController
     @offer_side = false
 
     @all_rooms = Room.where(published_room: true)
-    @all_evals = Evaluation.where(user_id: current_account.user.id)
-
-    @liked_rooms = []
     @evaluated_rooms = []
+    @liked_rooms = []
+    @my_rooms = []
 
-    @all_evals.each do |eval|
-      @liked_rooms << @all_rooms.detect {|r| r.id == eval.room_id && eval.status }
-      @evaluated_rooms << @all_rooms.detect {|r| r.id == eval.room_id }
+    if !current_account.nil?
+      @all_evals = Evaluation.where(user_id: current_account.user.id)
+
+      @all_evals.each do |eval|
+        @liked_rooms << @all_rooms.detect {|r| r.id == eval.room_id && eval.status }
+        @evaluated_rooms << @all_rooms.detect {|r| r.id == eval.room_id }
+      end
+
+      @my_rooms << @all_rooms.detect {|r| r.building.user_id == current_account.user.id }
+
     end
 
-    @new_rooms = @all_rooms - @evaluated_rooms
+    @new_rooms = @all_rooms - @evaluated_rooms - @my_rooms
 
+    if !@new_rooms.empty?
+      @new_room = @new_rooms.sample
+
+      @markers = Gmaps4rails.build_markers(@new_room.building) do |room, marker|
+        marker.lat room.latitude
+        marker.lng room.longitude
+      end
+    end
   end
 
   def show
@@ -67,12 +81,21 @@ class BuildingsController < ApplicationController
     @buildings = Building.where(user_id: current_account.user.id)
 
     if params[:extra] != nil
-      @right_rooms = Building.find(params[:extra]).rooms
+      @right_building = Building.find(params[:extra])
+      @right_rooms = @right_building.rooms
     else
       if !@buildings.first.nil?
-        @right_rooms = @buildings.first.rooms
+        @right_building = @buildings.first
+        @right_rooms = @right_building.rooms
       else
         redirect_to new_user_building_path(current_account.user.id)
+      end
+    end
+
+    if !@right_building.nil?
+      @markers = Gmaps4rails.build_markers(@right_building) do |room, marker|
+        marker.lat room.latitude
+        marker.lng room.longitude
       end
     end
   end

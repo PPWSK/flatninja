@@ -11,17 +11,23 @@
   background: #F0F0F0;
 }
 .card span.card-title-form {
-    color: #fff;
-    font-size: 12px;
-    font-weight: 50;
-    text-transform: uppercase;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 50;
+  text-transform: uppercase;
+}
+.other-title {
+  font-size: 24px;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 .card span.card-title {
-    color: #fff;
-    font-size: 24px;
-    font-weight: 300;
-    text-transform: uppercase;
-    margin-bottom: 10px;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 300;
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 .card .card-image {
   position: relative;

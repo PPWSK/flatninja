@@ -82,6 +82,7 @@
             </div>
           </div>
         </div>
+        <% if account_signed_in? && current_account.user.present? && current_account.user == room.building.user %>
         <div class="row">
           <% if room.published_room %>
               <span><i class='fa fa-toggle-on fa-1x' style="color:green"></i>&nbsp;&nbsp;Room is published and visible for searchers</span>
@@ -91,8 +92,13 @@
               <span><i class='fa fa-toggle-off fa-1x' style="color:red"></i>&nbsp;&nbsp;Room must be edited in order to be published...</span>
           <% end %>
         </div>
+        <% end %>
       </div>
     </div>
+  </div>
+
+  <div class="card-image">
+    <div id="map" style="width: 100%; height: 100px;"></div>
   </div>
 
   <div class="card-action">
@@ -157,7 +163,19 @@
     </div>
 
   <% end %>
-
   </div>
-
 </div>
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(document).on('ready', function() {
+      handler = Gmaps.build('Google');
+      handler.buildMap({ internal: { id: 'map' } }, function(){
+        markers = handler.addMarkers(<%= raw @markers.to_json %>);
+        handler.bounds.extendWith(markers);
+        handler.fitMapToBounds();
+        handler.getMap().setZoom(10);
+      });
+    })
+  <% end %>
+<% end %>
