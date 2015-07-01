@@ -97,13 +97,16 @@
 
   <div class="card-action">
 
-    <!-- room is from current account -->
+  <!-- user signed in -->
+  <% if account_signed_in? && current_account.user.present? %>
 
-    <% if account_signed_in? && current_account.user.present? && current_account.user == room.building.user %>
+    <!-- room is from current account -->
+    <% if current_account.user == room.building.user %>
+
 
       <!-- edit -->
 
-      <%= link_to ("<i class='fa fa-pencil-square-o fa-1x'>&nbsp;&nbsp;Edit</i>").html_safe, edit_user_building_room_path(room.building.user, room.building, room) %>
+      <%= link_to ("<i class='fa fa-pencil-square-o fa-1x'>&nbsp;&nbsp;Edit</i>").html_safe, edit_user_building_room_path(current_account.user, room.building, room) %>
 
       <!-- publish if room is valid -->
 
@@ -111,28 +114,50 @@
 
       <!-- un-publish -->
 
-        <%= link_to ("<i class='fa fa-share-square-o fa-1x card-action-negative'>&nbsp;&nbsp;Un-publish</i>").html_safe, unpublish_user_building_room_path(room.building.user, room.building, room), :confirm => "Are you sure? This room won't be visibile to users anymore..." if room.published_room %>
+        <%= link_to ("<i class='fa fa-share-square-o fa-1x card-action-negative'>&nbsp;&nbsp;Un-publish</i>").html_safe, unpublish_user_building_room_path(current_account.user, room.building, room), :confirm => "Are you sure? This room won't be visibile to users anymore..." if room.published_room %>
 
       <% else %>
 
         <!-- publish -->
 
-        <%= link_to ("<i class='fa fa-share-square-o fa-1x'>&nbsp;&nbsp;Publish</i>").html_safe, publish_user_building_room_path(room.building.user, room.building, room) if room.valid_room %>
+        <%= link_to ("<i class='fa fa-share-square-o fa-1x'>&nbsp;&nbsp;Publish</i>").html_safe, publish_user_building_room_path(current_account.user, room.building, room) if room.valid_room %>
 
       <% end %>
 
     <!-- room is from someone else -->
-
     <% else %>
       <div class="row">
+
+        <!-- positive evaluation -->
+
         <div class="col-sm-6 like-it">
-        <%= link_to ("<i class='fa fa-heart fa-4x' style='color: red;'></i>").html_safe, root_path %>
+        <%= link_to ("<i class='fa fa-heart fa-4x' style='color: red;'></i>").html_safe,  user_building_room_evaluations_path(current_account.user, room.building, room, eval: true), method: :post %>
         </div>
+
+        <!-- negative evaluation -->
+
         <div class="col-sm-6 like-it">
-        <%= link_to ("<i class='fa fa-times fa-4x' style='color: black;'></i>").html_safe, root_path %>
+        <%= link_to ("<i class='fa fa-times fa-4x' style='color: black;'></i>").html_safe,  user_building_room_evaluations_path(current_account.user, room.building, room, eval: false), method: :post %>
         </div>
       </div>
+
     <% end %>
+
+  <!-- no user signed in -->
+
+  <% else %>
+
+    <div class="row">
+      <div class="col-sm-6 like-it">
+      <%= link_to ("<i class='fa fa-heart fa-4x' style='color: gray;'></i>").html_safe, "#" %>
+      </div>
+      <div class="col-sm-6 like-it">
+      <%= link_to ("<i class='fa fa-times fa-4x' style='color: gray;'></i>").html_safe, "#" %>
+      </div>
+    </div>
+
+  <% end %>
+
   </div>
 
 </div>

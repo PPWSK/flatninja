@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   before_action :create_profile_if_nonexistent
 
   private
+
   def create_profile_if_nonexistent
     if current_account.present?
       if !current_account.user.present? || !current_account.user.valid?
@@ -13,4 +14,5 @@ class ApplicationController < ActionController::Base
       end
     end
   end
+
 end

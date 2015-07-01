@@ -1,6 +1,6 @@
-<div id="container">
-  <div id="row">
-    <div id="col-sm-8 col-offset-2">
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-8 col-offset-2">
       <h1>
         Welcome
         <% if account_signed_in? && current_account.user.present? && current_account.user.valid? %>
@@ -11,8 +11,8 @@
       </h1>
     </div>
   </div>
-  <div id="row">
-    <div class="col-sm-12">
+  <div class="row">
+    <div class="col-sm-8">
       <div class="row">
         <% room = @rooms.sample %>
         <% if !room.nil? %>
@@ -21,6 +21,18 @@
           No rooms yet!
         <% end %>
       </div>
+    </div>
+    <div class="col-sm-3 col-sm-offset-1">
+
+      <%= @liked_rooms.size.to_s %> liked rooms:
+      <% if @liked_rooms.size > 0 %>
+        <% @liked_rooms.each do |lr| %>
+          <div class="row">
+            <%= render partial: 'rooms/show', locals: { local_room: lr, local_user: @user } %>
+          </div>
+        <% end %>
+      <% end %>
+
     </div>
   </div>
 </div>

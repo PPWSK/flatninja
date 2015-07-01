@@ -8,14 +8,14 @@ class UsersController < ApplicationController
   end
 
   def create
-      @user = User.create(user_params)
-      @user.account = current_account
-      if @user.save
-        flash[:notice] = "Please add some pictures!"
-        redirect_to edit_user_path(@user)
-      else
-        render :new
-      end
+    @user = User.create(user_params)
+    @user.account = current_account
+    if @user.save
+      flash[:notice] = "Please add some pictures!"
+      redirect_to edit_user_path(@user)
+    else
+      render :new
+    end
   end
 
   def show

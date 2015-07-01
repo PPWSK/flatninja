@@ -4,20 +4,33 @@ class BuildingsController < ApplicationController
   before_action :find_user, only: [ :new, :create, :edit, :update, :myrooms ]
 
   def index
-    @buildings = Building.all
+    @offer_side = false
+    # @buildings = Building.all
     @rooms = Room.where(published_room: true)
+
+    @evals = Evaluation.where(user_id: current_account.user.id, status: true)
+    @liked_rooms = []
+    @evals.each do |eval|
+      @liked_rooms << @rooms.detect  {|r| r.id == eval.room_id }
+    end
+    @liked_rooms
+
   end
 
   def show
+    @offer_side = false
   end
 
   def new
+    @offer_side = true
     @building = Building.new
     @show_map = true
     5.times { @building.rooms.build }
   end
 
   def create
+    @offer_side = true
+    # raise building_params["rooms_attributes"]["0"].inspect
     @building = @user.buildings.build(building_params)
 
     @building.rooms.each do |room|
@@ -31,8 +44,9 @@ class BuildingsController < ApplicationController
     end
 
     if @building.save!
-      flash[:alert] = "Created #{@building.rooms.count} new rooms."
+      flash[:alert] = "Created #{@building.rooms.count} new rooms. Now please add some pictures."
       redirect_to myrooms_user_buildings_path(current_account.user.id, extra: @building.id)
+      # TODO: redirect to edit instead of myrooms in order to upload pics.
     else
       render :new
     end
@@ -45,6 +59,7 @@ class BuildingsController < ApplicationController
   end
 
   def myrooms
+    @offer_side = true
     @buildings = Building.where(user_id: current_account.user.id)
 
     if params[:extra] != nil
@@ -71,4 +86,5 @@ class BuildingsController < ApplicationController
   def find_user
     @user = current_account.user
   end
+
 end

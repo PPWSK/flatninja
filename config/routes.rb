@@ -15,7 +15,9 @@ Rails.application.routes.draw do
       end
     end
     resources :buildings, only: [:show] do
-      resources :evaluations, only: [ :new, :create ]
+      resources :rooms, only: [ :show, :index ] do
+        resources :evaluations, only: [ :new, :create ]
+      end
     end
     resources :user_pictures, only: [ :new, :create, :destroy ]
   end
