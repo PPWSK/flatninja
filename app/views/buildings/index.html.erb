@@ -13,14 +13,25 @@
   </div>
   <div class="row">
     <div class="col-sm-8">
-      <div class="row">
-        <% room = @rooms.sample %>
+
+      <% if @all_rooms.size <= 0 %>
+        no rooms yet... wait for new offers!
+      <% elsif @new_rooms.size <= 0 %>
+        No more new rooms!
+        <%= link_to "Reset?", destroy_evals_user_path(current_account.user) %>
+
+      <% else %>
+        <%= @new_rooms.size.to_s %> new rooms:
+        <% room = @new_rooms.sample %>
         <% if !room.nil? %>
+          <div class="row">
           <%= render partial: 'rooms/show', locals: { local_room: room, local_user: @user } %>
+          </div>
         <% else %>
-          No rooms yet!
+          something wrong with the room...
         <% end %>
-      </div>
+      <% end %>
+
     </div>
     <div class="col-sm-3 col-sm-offset-1">
 

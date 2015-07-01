@@ -20,6 +20,7 @@ Rails.application.routes.draw do
       end
     end
     resources :user_pictures, only: [ :new, :create, :destroy ]
+    get 'destroy_evals', on: :member
   end
 
   root to: 'buildings#index'

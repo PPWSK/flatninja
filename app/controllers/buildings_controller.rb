@@ -5,15 +5,19 @@ class BuildingsController < ApplicationController
 
   def index
     @offer_side = false
-    # @buildings = Building.all
-    @rooms = Room.where(published_room: true)
 
-    @evals = Evaluation.where(user_id: current_account.user.id, status: true)
+    @all_rooms = Room.where(published_room: true)
+    @all_evals = Evaluation.where(user_id: current_account.user.id)
+
     @liked_rooms = []
-    @evals.each do |eval|
-      @liked_rooms << @rooms.detect  {|r| r.id == eval.room_id }
+    @evaluated_rooms = []
+
+    @all_evals.each do |eval|
+      @liked_rooms << @all_rooms.detect {|r| r.id == eval.room_id && eval.status }
+      @evaluated_rooms << @all_rooms.detect {|r| r.id == eval.room_id }
     end
-    @liked_rooms
+
+    @new_rooms = @all_rooms - @evaluated_rooms
 
   end
 

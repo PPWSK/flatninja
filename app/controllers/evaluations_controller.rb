@@ -12,6 +12,6 @@ class EvaluationsController < ApplicationController
     else
       flash[:alert] = "something went wrong, status: " + params[:eval].to_s
     end
-
   end
+
 end

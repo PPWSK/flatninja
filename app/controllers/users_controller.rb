@@ -34,7 +34,18 @@ class UsersController < ApplicationController
     end
   end
 
+  def destroy_evals
+    @evaluations = Evaluation.where(user_id: current_account.user.id)
+    if @evaluations.destroy_all
+      flash[:notice] = "All your likes and dislikes are reset!"
+      redirect_to root_path
+    else
+      flash[:alert] = "something went wrong"
+    end
+  end
+
   private
+
   def user_params
     params.require(:user).permit(:first_name, :last_name, :birth_date, :gender, :phone_number, :user_picture)
   end
