@@ -100,6 +100,16 @@ class BuildingsController < ApplicationController
         marker.lng room.longitude
       end
     end
+
+    @all_evals = Evaluation.all
+    @my_rooms_evals = []
+
+    @buildings.each do |mybuilding|
+      mybuilding.rooms.each do |myroom|
+        # @my_rooms_evals << Evaluation.where(room_id: myroom.id, status: true)
+        @my_rooms_evals << @all_evals.detect {|e| e.room_id == myroom.id && e.status && e.owner_evaluated != true }
+      end
+    end
   end
 
   private

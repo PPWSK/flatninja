@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150630115639) do
+ActiveRecord::Schema.define(version: 20150702123453) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,8 +75,10 @@ ActiveRecord::Schema.define(version: 20150630115639) do
     t.boolean  "status"
     t.integer  "room_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+    t.boolean  "owner_evaluated"
+    t.boolean  "searcher_match_seen"
   end
 
   add_index "evaluations", ["room_id"], name: "index_evaluations_on_room_id", using: :btree

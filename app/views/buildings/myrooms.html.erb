@@ -52,10 +52,15 @@
         <div class="row">
           <%= render partial: 'rooms/show', locals: { local_room: r, local_user: @user } %>
         </div>
+        <% @my_rooms_evals.each do |mre| %>
+          <% if !mre.nil? && r.id == mre.room_id %>
+            <div class="row">
+              <%= render partial: 'users/show_small', locals: { mre: mre } %>
+            </div>
+          <% end %>
+        <% end %>
       <% end %>
     </div>
-
-    <!-- TODO: add a room to this building -->
 
   </div>
 <% end %>

@@ -140,6 +140,22 @@
   border-radius: 50%;
 }
 
+.img-avatar3{
+
+  position: absolute;
+  overflow: hidden;
+  top: -10px;
+  left: -50px;
+  z-index: 20;
+
+  border: 2px solid white;
+  box-shadow: 0 0 2px rgb(200, 200, 200);
+  height: 50px;
+  width: 50px;
+  margin-right: 0px;
+  border-radius: 50%;
+}
+
 .img-avatar2-span{
   width: 80px;
   display: inline-block;

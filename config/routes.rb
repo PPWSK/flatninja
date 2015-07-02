@@ -21,7 +21,12 @@ Rails.application.routes.draw do
     end
     resources :user_pictures, only: [ :new, :create, :destroy ]
     get 'destroy_evals', on: :member
+
+    post 'evaluations/:id' => 'evaluations#match_by_owner', as: :evaluation
+
   end
+
+
 
   root to: 'buildings#index'
 
