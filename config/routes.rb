@@ -23,6 +23,9 @@ Rails.application.routes.draw do
     get 'destroy_evals', on: :member
 
     post 'evaluations/:id' => 'evaluations#match_by_owner', as: :evaluation
+    resources :evaluations, only: [ :show ] do
+      resources :messages, only: [ :new, :create ]
+    end
 
   end
 

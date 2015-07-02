@@ -17,6 +17,9 @@ class ApplicationController < ActionController::Base
   end
 
   def check_for_messages
+    if current_account.present? && current_account.user.present?
+      @new_messages = Message.where(recipient_id: current_account.user.id, read: [nil, false] )
+    end
   end
 
 end

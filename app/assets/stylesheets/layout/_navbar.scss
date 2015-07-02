@@ -161,3 +161,37 @@ $navbar-profile-border-width: 2px;
     }
   }
 }
+
+.red-dot {
+    /* This breaks the div from the normal HTML document. */
+    padding:1px 1px 1px 1px;
+    background-color:red; /* you could use a background image if you'd like as well */
+    color:white;
+    font-weight:bold;
+    font-size:1em;
+    display:inline;
+    min-width: 50px;
+    width: 50px;
+    height: 50px;
+
+    /* The following is CSS3, but isn't crucial for this technique to work. */
+    /* Keep in mind that if a browser doesn't support CSS3, it's fine! They just won't have rounded borders and won't have a box shadow effect. */
+    /* You can always use a background image to produce the same effect if you want to, and you can use both together so browsers without CSS3 still have the rounded/shadow look. */
+    border-radius:50px;
+    box-shadow:1px 1px 1px gray;
+}
+
+.numberCircle {
+  background: red;
+  border-radius: 0.8em;
+  -moz-border-radius: 0.8em;
+  -webkit-border-radius: 0.8em;
+  color: #ffffff;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1.6em;
+  margin-right: 5px;
+  margin-left: 5px;
+  text-align: center;
+  width: 1.6em;
+}
