@@ -9,6 +9,7 @@
   border-radius: 2px;
   background-clip: padding-box;
   background: #F0F0F0;
+  // background: rgba(0, 151, 167, 0.05)
 }
 .card span.card-title-form {
   color: #fff;
@@ -17,7 +18,7 @@
   text-transform: uppercase;
 }
 .other-title {
-  font-size: 24px;
+  font-size: 20px;
   font-weight: 300;
   text-transform: uppercase;
   margin-bottom: 10px;
@@ -35,10 +36,11 @@
   // margin-top: 2%;
   // margin-bottom: 2%;
 }
+
 .card .card-image img {
   // border-radius: 2px 2px 0 0;
-  background-clip: padding-box;
-  position: relative;
+  // background-clip: padding-box;
+  // position: relative;
   z-index: 1;
 }
 

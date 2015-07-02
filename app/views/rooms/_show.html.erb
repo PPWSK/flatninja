@@ -15,10 +15,9 @@
     <div class="row">
       <div class="owl-carousel">
         <% room.room_pictures.each do |rpic| %>
-          <%= image_tag rpic.file.url(:medium), class: "img-responsive" %>
+        <div><%= image_tag rpic.file.url(:medium), height: '200' %></div>
         <% end %>
       </div>
-
 
       <% if room.room_pictures.size == 0 %>
         <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
@@ -118,10 +117,12 @@
   <div class="card-content">
     <div class="row">
       <div class="col-sm-10 col-sm-offset-1">
-      <%= image_tag room.building.user.user_pictures.first.file.url(:thumb), class: "img-avatar2" %>
+        <% if room.building.user.user_pictures.first.present? %>
+          <%= image_tag room.building.user.user_pictures.first.file.url(:thumb), class: "img-avatar2" %>
+        <% end %>
       <span class="img-avatar2-span">&nbsp;</span>
       <span><b><%= room.building.user.first_name %></b>
-        <% mates = room.building.number_of_roommates.size - 1 %>
+        <% mates = room.building.number_of_roommates - 1 %>
         <b><% if mates == 1 %>
           + 1 other
         <% elsif mates >= 2 %>
@@ -222,7 +223,7 @@
         margin:10,
         loop:true,
         autoWidth:true,
-        items:4
+        items:<%= room.room_pictures.size %>
     })
 
     $(document).on('ready', function() {

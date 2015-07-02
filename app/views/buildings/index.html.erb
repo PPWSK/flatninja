@@ -12,22 +12,8 @@
   </div>
 
 
-
   <div class="row">
-    <div class="col-sm-10 col-offset-2">
-
-      <h1>
-        Welcome
-        <% if account_signed_in? && current_account.user.present? && current_account.user.valid? %>
-          <%= current_account.user.first_name %>
-        <% else %>
-          , please sign up to like rooms!
-        <% end %>
-      </h1>
-
-    </div>
-  </div>
-  <div class="row">
+    <div class="col-sm-1"></div>
     <div class="col-sm-8">
 
       <% if @all_rooms.size <= 0 %>
@@ -48,7 +34,7 @@
       <% end %>
 
     </div>
-    <div class="col-sm-3 col-sm-offset-1">
+    <div class="col-sm-3">
 
       <br><%= @liked_rooms.size.to_s %> liked rooms:
       <% if @liked_rooms.size > 0 %>
