@@ -1,1 +1,12 @@
-helloè!
+<div class="row">
+  <div class="col-sm-6">
+    <% @messages.each do |msg| %>
+
+      <% @left = (msg.evaluation.user == current_account.user ? false : true) %>
+      <div class="row">
+        <%= msg.evaluation.user.first_name %>: "<%= msg.content %>"
+      </div>
+
+    <% end %>
+  </div>
+</div>

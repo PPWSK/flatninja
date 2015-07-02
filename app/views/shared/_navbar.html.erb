@@ -25,7 +25,11 @@
             <%= link_to user_messages_path(current_account.user.id) do %>
             <% @news = @new_messages.size > 0 ? @new_messages.size.to_s : "" %>
 
-              <i class="fa fa-envelope-o"></i><span class="numberCircle"><%= @news %></span><%= t(".messages", default: "Messages") %>
+              <i class="fa fa-envelope-o"></i>
+              <% if @news.to_i > 0 %>
+                <span class="numberCircle"><%= @news %></span>
+              <% end %>
+              <%= t(".messages", default: "Messages") %>
             <% end %>
           </li>
 
