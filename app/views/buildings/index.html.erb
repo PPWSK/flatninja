@@ -1,67 +1,111 @@
-<div class="container-fluid">
+<!-- BACKGROUND SECTION -->
 
-  <div class="aside slideMenuLeft">
-    <ul>
-      <li>aaaa</li>
-      <li>aaaa</li>
-      <li>aaaa</li>
-      <li>aaaa</li>
-      <li>aaaa</li>
-      <li>aaaa</li>
-    </ul>
-  </div>
+<% content_for(:before_container) do %>
 
-
-  <div class="row">
-    <div class="col-sm-1"></div>
-    <div class="col-sm-8 padded-di">
-
-      <% if @all_rooms.size <= 0 %>
-        <br>no rooms yet... wait for new offers!
-      <% elsif @new_rooms.size <= 0 %>
-        <br>No more new rooms!
-        <%= link_to "Reset?", destroy_evals_user_path(current_account.user) %>
-
-      <% else %>
-        <br><%= @new_rooms.size.to_s %> new rooms:
-        <% if !@new_room.nil? %>
-          <div class="row">
-          <%= render partial: 'rooms/show', locals: { local_room: @new_room, local_user: @user } %>
-          </div>
-        <% else %>
-          something wrong with the room...
-        <% end %>
-      <% end %>
-
+<div class="row bakgrownd">
+  <div class="col-sm-4 col-sm-offset-2">
     </div>
-    <div class="col-sm-3 padded-di-left">
+  <div class="col-sm-4">
+    </div>
+</div>
 
-      <br><%= @liked_rooms.size.to_s %> liked rooms:
-      <% if !@all_evals.nil? && @all_evals.size > 0 %>
-        <% @all_evals.each do |e| %>
-          <% if !e.nil? && e.status %>
-          <div class="row">
-            <%= render partial: 'rooms/small_show', locals: { eval: e, local_user: @user } %>
-          </div>
+
+<div class="row">
+
+  <!-- MENU LEFT --><br>
+
+  <div class="col-sm-2 border-right">
+
+    <div class="row">
+      <div class="card-image col-sm-10 col-sm-offset-1">
+
+        <div class="row">
+        <% if @all_rooms.size <= 0 %>
+          no rooms yet... wait for new offers!
+        <% elsif @new_rooms.size <= 0 %>
+          No more new rooms!
+          <%= link_to "Reset?", destroy_evals_user_path(current_account.user) %>
+        <% else %>
+          <%= @new_rooms.size.to_s %>
+          <% if @new_rooms.size > 1 %>
+            new rooms
+          <% else %>
+            new room
           <% end %>
         <% end %>
-      <% end %>
+        <br><br>
+        </div>
 
-       <div id='toggleAside' style="visibility:hidden;">Toggle</div>
+        <div class="row">
+          <p>City</p>
+          <input type="text" value="Brussels" style="width:100%;">
 
+        </div>
+        <div class="row">
+          <br>
+          <p>Start date</p>
+          <input type='text' class="form-control" id='datetimepicker4' />
+        </div>
+        <div class="row">
+          <br>
+          <p>Start date</p>
+          <input type="date" value="05/07/15" style="width:100%;">
+        </div>
+        <div class="row">
+          <br>
+          <p>Start date</p>
+          <input type="date" value="05/07/15" style="width:100%;">
+        </div>
+        <div class="row">
+          <br>
+          <p>Start date</p>
+          <input type="date" value="05/07/15" style="width:100%;">
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="col-sm-6 col-sm-offset-1">
+
+  <!-- NEW ROOM SECTION --><br>
+
+  <% if !@new_room.nil? %>
+  <div class="row">
+  <%= render partial: 'rooms/show', locals: { local_room: @new_room, local_user: @user } %>
+  </div>
+  <% end %>
+
+  </div>
+
+  <!-- LIKED ROOMS SECTION --><br>
+
+  <div class="col-sm-2 col-sm-offset-1 border-left">
+    <div class="row">
+      <div class="card-image col-sm-10 col-sm-offset-1">
+
+        <div class="row">
+        <% if @liked_rooms.size > 1 %>
+          <%= @liked_rooms.size.to_s %> liked rooms
+        <% elsif @liked_rooms.size > 0 %>
+          1 liked room
+        <% else %>
+          Start liking rooms!
+        <% end %>
+        </div>
+
+        <% if !@all_evals.nil? && @all_evals.size > 0 %>
+          <% @all_evals.each do |e| %>
+            <% if !e.nil? && e.status %>
+            <div class="row">
+              <%= render partial: 'rooms/small_show', locals: { eval: e, local_user: @user } %>
+            </div>
+            <% end %>
+          <% end %>
+        <% end %>
+
+
+      </div>
     </div>
   </div>
 </div>
-
-<!-- JQUERY SECTION -->
-
-<% content_for(:after_js) do %>
-  <%= javascript_tag do %>
-    $(document).ready(
-    function(){
-        $("#toggleAside").click(function(){
-         $(".aside").toggleClass("slideMenuLeft");
-        })
-    });
-  <% end %>
 <% end %>

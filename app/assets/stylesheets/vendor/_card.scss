@@ -18,10 +18,9 @@
   text-transform: uppercase;
 }
 .other-title {
-  font-size: 20px;
-  font-weight: 300;
+  font-size: 16px;
+  font-weight: 200;
   text-transform: uppercase;
-  margin-bottom: 10px;
 }
 .card span.card-title {
   color: #fff;
@@ -29,6 +28,15 @@
   font-weight: 300;
   text-transform: uppercase;
   margin-bottom: 10px;
+}
+.card span.card-title-sm {
+  color: #fff;
+  font-size: 16px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  position: absolute;
+  top: -20px;
+  left: 3px;
 }
 .card .card-image {
   position: relative;
@@ -119,13 +127,4 @@
 .card-action-negative:hover {
   color: #FF6A33;
   text-decoration: none;
-}
-
-.padded-di {
-  padding-left: 10px;
-  padding-right: 10px;
-}
-
-.padded-di-left {
-  padding-left: 10px;
 }

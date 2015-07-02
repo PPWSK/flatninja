@@ -34,7 +34,7 @@ class UsersController < ApplicationController
   end
 
   def destroy_evals
-    @evaluations = Evaluation.where(user_id: current_account.user.id)
+    @evaluations = Evaluation.where(user_id: current_account.user.id, status: false)
     if @evaluations.destroy_all
       flash[:notice] = "All your likes and dislikes are reset!"
       redirect_to root_path

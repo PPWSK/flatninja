@@ -9,11 +9,12 @@ class EvaluationsController < ApplicationController
       room_id: params[:room_id],
       status: params[:eval])
 
-    if @evaluation.save
+    if @evaluation.save!
       # flash[:notice] = "you have " + (@evaluation.status ? 'liked' : 'disliked') + " prior room!"
       redirect_to root_path
     else
       flash[:alert] = "something went wrong, status: " + params[:eval].to_s
+      redirect_to root_path
     end
   end
 
@@ -62,9 +63,6 @@ class EvaluationsController < ApplicationController
   end
 
   def cancel_by_one_party
-  end
-
-  def one_party_saw_match
   end
 
   def find_eval

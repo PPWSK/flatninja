@@ -24,7 +24,6 @@
 //= require gmaps-auto-complete
 
 //= require gmaps
-//= require owl.carousel
 //= require owl.carousel.min
 
 //= require_tree .

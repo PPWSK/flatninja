@@ -15,9 +15,11 @@ class BuildingsController < ApplicationController
       @all_evals = Evaluation.where(user_id: current_account.user.id)
 
       @all_evals.each do |eval|
-        @liked_rooms << @all_rooms.detect {|r| r.published_room && r.id == eval.room_id && eval.status }
+        @liked_rooms << @all_rooms.detect {|r| r.id == eval.room_id && eval.status == true }
         @evaluated_rooms << @all_rooms.detect {|r| r.id == eval.room_id }
       end
+      @liked_rooms.compact!
+      @evaluated_rooms.compact!
 
       @temp_my_rooms = @all_rooms.select {|r| r.building.user_id == current_account.user.id }
       @temp_my_rooms.each do |tmr|

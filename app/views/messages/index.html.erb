@@ -4,7 +4,13 @@
 
       <% @left = (msg.evaluation.user == current_account.user ? false : true) %>
       <div class="row">
-        <%= msg.evaluation.user.first_name %>: "<%= msg.content %>"
+        <p class="<%= 'float-it' if @left %>">
+        <% if @left %>"<%= msg.content %>"<% end %>
+        <% if msg.evaluation.user.user_pictures.first.present? %>
+          <%= image_tag msg.evaluation.user.user_pictures.first.file.url(:thumb), class: ["img-avatar3",('float-it' if @left)] %>
+        <% end %>
+        <% if @left != true %>"<%= msg.content %>"<% end %>
+        </p>
       </div>
 
     <% end %>
