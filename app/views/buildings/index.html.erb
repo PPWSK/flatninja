@@ -37,17 +37,17 @@
     <div class="col-sm-3 padded-di-left">
 
       <br><%= @liked_rooms.size.to_s %> liked rooms:
-      <% if @liked_rooms.size > 0 %>
-        <% @liked_rooms.each do |lr| %>
-          <% if !lr.nil? %>
+      <% if !@all_evals.nil? && @all_evals.size > 0 %>
+        <% @all_evals.each do |e| %>
+          <% if !e.nil? && e.status %>
           <div class="row">
-            <%= render partial: 'rooms/small_show', locals: { local_room: lr, local_user: @user } %>
+            <%= render partial: 'rooms/small_show', locals: { eval: e, local_user: @user } %>
           </div>
           <% end %>
         <% end %>
       <% end %>
 
-       <div id='toggleAside'>Toggle</div>
+       <div id='toggleAside' style="visibility:hidden;">Toggle</div>
 
     </div>
   </div>

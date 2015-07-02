@@ -1,5 +1,6 @@
-<% if local_assigns.has_key? :local_room %>
-  <% room = local_room %>
+<% if local_assigns.has_key? :eval %>
+  <% room = eval.room %>
+  <% owner_evaluated = eval.owner_evaluated %>
 <% end %>
 <% if local_assigns.has_key? :local_user %>
   <% user = local_user %>
@@ -47,5 +48,15 @@
       </div>
     </div>
   </div>
+  <div class="card-action">
 
+    <% if owner_evaluated == true %>
+      <span style="color:green">match! owner liked you.</span>
+    <% elsif owner_evaluated == false %>
+      <span style="color:red">your interest has been denied.</span>
+    <% else %>
+      <span style="color:orange">awaiting owner response...</span>
+    <% end %>
+
+  </div>
 </div>

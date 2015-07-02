@@ -19,11 +19,10 @@ class EvaluationsController < ApplicationController
 
   def match_by_owner
     if @user == @eval.room.building.user
-      @eval.owner_evaluated = true
+      @eval.owner_evaluated = params[:owner_eval]
       if @eval.save!
+        # send message to searcher.
         redirect_to root_path
-        #TODO: notify
-        #TODO: create message for searcher!!
       else
         redirect_to root_path
       end
