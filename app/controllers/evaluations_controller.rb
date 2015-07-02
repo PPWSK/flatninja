@@ -21,28 +21,39 @@ class EvaluationsController < ApplicationController
     if @user == @eval.room.building.user
       @eval.owner_evaluated = params[:owner_eval]
       if @eval.save
+
+        if @eval.owner_evaluated == true
         # send message to searcher.
 
-        if @eval.user_id == @user.id
-          # means the searcher == writer of message
-          recipient = @eval.room.building.user.id
+          if @eval.user_id == @user.id
+            # means the searcher == writer of message
+            recipient = @eval.room.building.user.id
+            sender = @eval.user.id
+          else
+            # means the searcher (@eval.user) is not sender
+            # thus searcher must be recipient of message
+            recipient = @eval.user.id
+            sender = @eval.room.building.user.id
+          end
+
+          @message = Message.create!(
+            evaluation_id: @eval.id,
+            content: "you have a match! Start your conversation..",
+            recipient_id: recipient,
+            sender_id: sender)
+
+          if @message.save
+            redirect_to myrooms_user_buildings_path(current_account.user.id)
+          else
+            flash[:alert] = "something went wrong"
+            redirect_to root_path
+          end
+
         else
-          # means the searcher (@eval.user) is not sender
-          # thus searcher must be recipient of message
-          recipient = @eval.user.id
-        end
-
-        @message = Message.create!(
-          evaluation_id: @eval.id,
-          content: "you have a match! Start your conversation..",
-          recipient_id: recipient)
-
-        if @message.save
+          # negative --> no message sent
           redirect_to myrooms_user_buildings_path(current_account.user.id)
-        else
-          flash[:alert] = "something went wrong"
-          redirect_to root_path
         end
+
       else
         flash[:alert] = "something went wrong"
         redirect_to root_path
