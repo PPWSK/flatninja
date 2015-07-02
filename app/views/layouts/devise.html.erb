@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="description" content="FlatNinja App">
+  <meta name="keywords" content="FlatNinja, Roommate, Cohousing, Appartager, Shared house, share appartment, samenhuizen, samenwonen, colocation">
+  <meta name="author" content="Flatninja">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+
+  <%= favicon_link_tag 'favicon.ico' %>
+  <%= stylesheet_link_tag("application") %>
+  <%= csrf_meta_tags %>
+
+  <!-- SITE TITLE -->
+  <title>FlatNinja</title>
+
+  <!-- =========================
+        FACEBOOK TAGS
+  ============================== -->
+
+  <meta property="og:title" content="FlatNinja - Lightning fast roommates">
+  <meta property="og:image:url" content="images/single-iphone2.png">
+  <meta property="og:description" content="Flatninja delivers lightning fast roommates, whether you're offering a room in a shared flat or if you're a roommate yourself searching for your new home!">
+  <meta property="og:site_name" content="FlatNinja"/>
+</head>
+<body>
+
+
+  <%= render "shared/navbar" %>
+  <%= render 'shared/notices' %>
+
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-4 col-sm-offset-4">
+            <%= yield %>
+          </div>
+        </div>
+      </div>
+
+
+ <%= render "shared/footer" %>
+  <!-- For inserting some analytics script (GA, Mixpanel..) -->
+  <%= render "shared/analytics" %>
+
+    <!-- google maps -->
+
+  <%= javascript_include_tag "https://maps.google.com/maps/api/js?libraries=places&amp;key=AIzaSyDwsnDAgnAel042_SyX2XQ40727TkE1pxw" %>
+  <%= javascript_include_tag "https://google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js" %>
+
+  <%= javascript_include_tag "application" %>
+
+  <%= yield(:after_js) %>
+
+</body>
+</html>
