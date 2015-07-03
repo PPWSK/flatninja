@@ -224,18 +224,6 @@
   }
 }
 
-.bakgrownd {
-  position: absolute;
-  height: 100%;
-  width: 100%;
-
-  color: #fff;
-  font-size: 42px;
-  font-weight: 600;
-  text-transform: uppercase;
-  z-index: -5;
-}
-
 .border-right {
   border-right: 1px solid $gray-light;
   border-radius: 6px;
@@ -244,3 +232,17 @@
   border-left: 1px solid $gray-light;
   border-radius: 6px;
 }
+
+#ghost1{
+  position: absolute;
+  visibility: hidden;
+  z-index: -100;
+}
+
+#ghost2{
+  position: absolute;
+  visibility: hidden;
+  z-index: -101;
+}
+
+

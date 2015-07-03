@@ -2,13 +2,6 @@
 
 <% content_for(:before_container) do %>
 
-<div class="row bakgrownd">
-  <div class="col-sm-4 col-sm-offset-2">
-    </div>
-  <div class="col-sm-4">
-    </div>
-</div>
-
 
 <div class="row">
 
@@ -20,19 +13,21 @@
       <div class="card-image col-sm-10 col-sm-offset-1">
 
         <div class="row">
-        <% if @all_rooms.size <= 0 %>
-          no rooms yet... wait for new offers!
-        <% elsif @new_rooms.size <= 0 %>
-          No more new rooms!
-          <%= link_to "Reset?", destroy_evals_user_path(current_account.user) %>
-        <% else %>
-          <%= @new_rooms.size.to_s %>
-          <% if @new_rooms.size > 1 %>
-            new rooms
-          <% else %>
-            new room
-          <% end %>
-        <% end %>
+          <span style="float:right;">
+            <% if @all_rooms.size <= 0 %>
+              no rooms yet... wait for new offers!
+            <% elsif @new_rooms.size <= 0 %>
+              No more new rooms!
+              <%= link_to "Reset?", destroy_evals_user_path(current_account.user) %>
+            <% else %>
+              <%= @new_rooms.size.to_s %>
+              <% if @new_rooms.size > 1 %>
+                new rooms
+              <% else %>
+                new room
+              <% end %>
+            <% end %>
+          </span>
         <br><br>
         </div>
 
@@ -61,8 +56,8 @@
           <p>Start date</p>
           <input type="date" value="05/07/15" style="width:100%;">
         </div>
+      <br>
       </div>
-
     </div>
   </div>
   <div class="col-sm-6 col-sm-offset-1">
@@ -70,14 +65,31 @@
   <!-- NEW ROOM SECTION --><br>
 
   <% if !@new_room.nil? %>
-  <div class="row">
+  <div class="row" id="newroom">
   <%= render partial: 'rooms/show', locals: { local_room: @new_room, local_user: @user } %>
   </div>
+
+  <div class="row ghost">
+    <div class="card" id="ghost1">
+      <div class="card-image">
+        &nbsp;
+      </div>
+    </div>
+  </div>
+
+  <div class="row ghost">
+    <div class="card" id="ghost2">
+      <div class="card-image">
+        &nbsp;
+      </div>
+    </div>
+  </div>
+
   <% end %>
 
   </div>
 
-  <!-- LIKED ROOMS SECTION --><br>
+  <!-- LIKED ROOMS SECTION -->
 
   <div class="col-sm-2 col-sm-offset-1 border-left">
     <div class="row">
@@ -108,4 +120,34 @@
     </div>
   </div>
 </div>
+<% end %>
+
+<% content_for(:after_js) do %>
+  <%= javascript_tag do %>
+    $(window).on('resize', function(){
+      setghosts();
+    })
+
+    $(document).on('ready', function() {
+      setghosts();
+    })
+
+    function setghosts(){
+      $('#ghost1').css({ width: $('#newroom').width()-100 });
+      $('#ghost1').css({ height: $('#newroom').height()+192 });
+      $('#ghost1').css({ 'margin-left': '5%' });
+      $('#ghost1').css({ 'margin-right': '5%' });
+      $('#ghost1').css({ 'margin-top': -$('#newroom').height()-202 });
+      $('#ghost1').css({ 'visibility': 'visible' });
+
+      $('#ghost2').css({ width: $('#newroom').width()-180 });
+      $('#ghost2').css({ height: $('#newroom').height()+210 });
+      $('#ghost2').css({ 'margin-left': '10%' });
+      $('#ghost2').css({ 'margin-right': '10%' });
+      $('#ghost2').css({ 'margin-top': -$('#newroom').height()-210 });
+      $('#ghost2').css({ 'visibility': 'visible' });
+      $('#ghost2').css({ 'z-index': '-101' });
+    }
+
+  <% end %>
 <% end %>
