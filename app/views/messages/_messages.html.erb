@@ -13,7 +13,10 @@
 <!-- messages -->
 
 <% messages.each do |msg| %>
-  <% @left = (msg.evaluation.user == current_account.user ? false : true) %>
+  <% sender = User.find(msg.sender_id) %>
+  <% recipient = User.find(msg.recipient_id) %>
+
+  <% @left = (sender == current_account.user ? false : true) %>
 
   <div class="row">
     <div class="message-div">
@@ -22,8 +25,8 @@
           <% if @left %>"<%= msg.content %>"<% end %>
         </span>
 
-        <% if msg.evaluation.user.user_pictures.first.present? %>
-          <%= image_tag msg.evaluation.user.user_pictures.first.file.url(:thumb), class: ["img-avatar3",('float-it' if @left)] %>
+        <% if sender.user_pictures.first.present? %>
+          <%= image_tag sender.user_pictures.first.file.url(:thumb), class: ["img-avatar3",('float-it' if @left)] %>
         <% end %>
 
         <span class="message-text">
@@ -37,4 +40,4 @@
 
 <!-- new message --><br><br>
 
-<%= render partial: 'messages/form' %>
+<%= render partial: 'messages/form', locals: { first_message: @messages.first }  %>

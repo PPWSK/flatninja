@@ -7,7 +7,28 @@ class MessagesController < ApplicationController
   end
 
   def create
+    @eval = Evaluation.find(params[:evaluation_id])
+    if params[:user_id] == @eval.user_id
+      recipient_id = @eval.room.building.user.id
+    else
+      recipient_id = @eval.user_id
+    end
 
+    @message = Message.create(
+      sender_id: params[:user_id],
+      recipient_id: recipient_id,
+      evaluation_id: params[:evaluation_id],
+      content: params[:content])
+
+    recip = User.find(recipient_id)
+
+    if @message.save!
+      flash[:notice] = "You've send a new message to " + recip.first_name + "!"
+      redirect_to user_messages_path(current_account.user.id, extra: params[:evaluation_id])
+    else
+      flash[:alert] = "Something went wrong, message not sent!"
+      redirect_to user_messages_path(current_account.user.id, extra: params[:evaluation_id])
+    end
   end
 
   def show
