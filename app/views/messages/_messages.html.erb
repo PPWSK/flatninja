@@ -2,7 +2,7 @@
 
 <% if local_assigns.has_key? :right_messages %>
   <% messages = right_messages %>
-<% end %>
+
 
 <!-- just for the label ... -->
 
@@ -40,4 +40,6 @@
 
 <!-- new message --><br><br>
 
-<%= render partial: 'messages/form', locals: { first_message: @messages.first }  %>
+<%= render partial: 'messages/form', locals: { first_message: messages.first }  %>
+
+<% end %>
