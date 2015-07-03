@@ -16,7 +16,7 @@
   <% sender = User.find(msg.sender_id) %>
   <% recipient = User.find(msg.recipient_id) %>
 
-  <% @left = (sender == current_account.user ? false : true) %>
+  <% @left = (sender == current_account.user ? true : false) %>
 
   <div class="row">
     <div class="message-div">
