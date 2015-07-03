@@ -8,14 +8,13 @@ class MessagesController < ApplicationController
 
   def create
     @eval = Evaluation.find(params[:evaluation_id])
-    if params[:user_id] == @eval.user_id
-      recipient_id = @eval.room.building.user.id
-    else
-      recipient_id = @eval.user_id
-    end
+
+    owner_id = @eval.room.building.user_id
+    searcher_id = @eval.user_id
+    recipient_id = (current_account.user_id == owner_id) ? searcher_id : owner_id
 
     @message = Message.create(
-      sender_id: params[:user_id],
+      sender_id: current_account.user_id,
       recipient_id: recipient_id,
       evaluation_id: params[:evaluation_id],
       content: params[:content])
@@ -62,7 +61,6 @@ class MessagesController < ApplicationController
   end
 
   def find_user
-    @user = User.find(params[:user_id])
     @user = current_account.user
   end
 

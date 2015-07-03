@@ -15,7 +15,7 @@
         <div class="row">
           <span style="float:right;">
             <% if @all_rooms.size <= 0 %>
-              no rooms yet... wait for new offers!
+              No rooms yet... List yours?
             <% elsif @new_rooms.size <= 0 %>
               No more new rooms!
               <%= link_to "Reset?", destroy_evals_user_path(current_account.user) %>
