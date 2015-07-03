@@ -12,7 +12,7 @@
 
 <!-- messages -->
 
-<% messages.each do |msg| %>
+<% messages.each_with_index do |msg, index| %>
   <% sender = User.find(msg.sender_id) %>
   <% recipient = User.find(msg.recipient_id) %>
 
@@ -25,8 +25,16 @@
           <% if @left %>"<%= msg.content %>"<% end %>
         </span>
 
-        <% if sender.user_pictures.first.present? %>
-          <%= image_tag sender.user_pictures.first.file.url(:thumb), class: ["img-avatar3",('float-it' if @left)] %>
+        <% if index == 0 %>
+
+          <%= image_tag "fn_logo_white.png", class: ["img-avatar3",('float-it' if @left)] %>
+
+        <% else %>
+
+          <% if sender.user_pictures.first.present? %>
+            <%= image_tag sender.user_pictures.first.file.url(:thumb), class: ["img-avatar3",('float-it' if @left)] %>
+          <% end %>
+
         <% end %>
 
         <span class="message-text">

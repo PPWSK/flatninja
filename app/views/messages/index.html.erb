@@ -13,14 +13,7 @@
 
     <div class="row">
       <% if mbe[1].size > 0 && mbe[0] == @right_eval.id %>
-        <div class="col-sm-2 vertic-div selected-color">
-          <% if @eval.room.building.user.user_pictures.first.present? %>
-          <%= image_tag @eval.room.building.user.user_pictures.first.file.url(:thumb), class: "img-avatar3", style: "width:35px;height:35px;" %>
-          <% else %>
-            <i class='fa fa-comments-o fa-2x vertic-it'></i>
-          <% end %>
-        </div>
-        <div class="col-sm-10 building-item-selected selected-color">
+        <div class="col-sm-12 building-item-selected selected-color">
           <p>
             <%= render partial: 'rooms/small_show', locals: { local_room: @eval.room } %>
           </p>
@@ -37,7 +30,8 @@
           <% end %>
         </div>
         <div class="col-sm-10 building-item">
-          <%= link_to ("<p class='building-item-title link-color'>" + @eval.room.optional_name + "</p><p class='link-color'>" + @eval.user.first_name + " (" + mbe[1].size.to_s + " messages)</p>").html_safe, user_messages_path(current_account.user.id, extra: mbe[0]) %>
+          <%= link_to ("<p class='building-item-title link-color'>" + @eval.room.optional_name + "</p><p class='link-color'>" + @eval.user.first_name +
+            " (" + mbe[1].size.to_s + " messages)</p>").html_safe, user_messages_path(current_account.user.id, extra: mbe[0]) %>
         </div>
       <% end %>
     </div>
