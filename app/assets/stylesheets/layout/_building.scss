@@ -8,10 +8,6 @@
   text-align: center;
 }
 
-.float-it {
-  float: right;
-}
-
 .building-menu {
   padding-top: 10px;
   padding-bottom: 20px;
@@ -50,6 +46,7 @@
 }
 
 .vertic-div {
+  margin-top: 15px;
   display: inline-block;
   vertical-align: middle;
   line-height: 2;
@@ -146,9 +143,8 @@
 
 .img-avatar3{
 
-  position: absolute;
   overflow: hidden;
-  top: -10px;
+
   left: -50px;
   z-index: 20;
 
@@ -158,6 +154,21 @@
   width: 50px;
   margin-right: 0px;
   border-radius: 50%;
+}
+
+.message-div {
+  line-height: 50px;
+  padding-bottom: 30px;
+}
+
+.message-text {
+  display: inline-block;
+  vertical-align: middle;
+
+}
+
+.float-it {
+  float: right;
 }
 
 .img-avatar2-span{

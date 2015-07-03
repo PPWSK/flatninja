@@ -1,18 +1,52 @@
-<div class="row">
-  <div class="col-sm-6">
-    <% @messages.each do |msg| %>
+<div class="row"><br><br>
 
-      <% @left = (msg.evaluation.user == current_account.user ? false : true) %>
-      <div class="row">
-        <p class="<%= 'float-it' if @left %>">
-        <% if @left %>"<%= msg.content %>"<% end %>
-        <% if msg.evaluation.user.user_pictures.first.present? %>
-          <%= image_tag msg.evaluation.user.user_pictures.first.file.url(:thumb), class: ["img-avatar3",('float-it' if @left)] %>
-        <% end %>
-        <% if @left != true %>"<%= msg.content %>"<% end %>
-        </p>
-      </div>
+  <!-- CONVERSATION SECTION -->
 
+  <div class="col-sm-3 building-menu">
+
+    <!-- CONV PER ROOM LIST -->
+
+<% @msg_by_eval.each do |mbe| %>
+<% @eval = Evaluation.find(mbe[0]) %>
+
+      <!-- conv that is selected -->
+
+    <div class="row">
+      <% if mbe[1].size > 0 && mbe[0] == @right_eval.id %>
+        <div class="col-sm-2 vertic-div selected-color">
+          <% if @eval.room.building.user.user_pictures.first.present? %>
+          <%= image_tag @eval.room.building.user.user_pictures.first.file.url(:thumb), class: "img-avatar3", style: "width:35px;height:35px;" %>
+          <% else %>
+            <i class='fa fa-comments-o fa-2x vertic-it'></i>
+          <% end %>
+        </div>
+        <div class="col-sm-10 building-item-selected selected-color">
+          <p>
+            <%= render partial: 'rooms/small_show', locals: { local_room: @eval.room } %>
+          </p>
+        </div>
+
+      <!-- conv that is unselected -->
+
+      <% else %>
+        <div class="col-sm-2 vertic-div">
+          <% if @eval.room.building.user.user_pictures.first.present? %>
+          <%= image_tag @eval.room.building.user.user_pictures.first.file.url(:thumb), class: "img-avatar3", style: "width:35px;height:35px;" %>
+          <% else %>
+            <i class='fa fa-comments-o fa-2x vertic-it'></i>
+          <% end %>
+        </div>
+        <div class="col-sm-10 building-item">
+          <%= link_to ("<p class='building-item-title link-color'>" + @eval.room.optional_name + "</p><p class='link-color'>" + @eval.user.first_name + " (" + mbe[1].size.to_s + " messages)</p>").html_safe, user_messages_path(current_account.user.id, extra: mbe[0]) %>
+        </div>
+      <% end %>
+    </div>
     <% end %>
+  </div>
+
+    <!-- MESSAGES SECTION -->
+
+  <div class="col-sm-8 col-sm-offset-1">
+    <%= render partial: 'messages/messages', locals: { right_messages: @right_messages } %>
   </div>
 </div>

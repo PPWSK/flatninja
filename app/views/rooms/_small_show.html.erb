@@ -5,6 +5,9 @@
 <% if local_assigns.has_key? :local_user %>
   <% user = local_user %>
 <% end %>
+<% if local_assigns.has_key? :local_room %>
+  <% room = local_room %>
+<% end %>
 
 <div class="card">
   <div class="card-image">
@@ -48,6 +51,7 @@
       </div>
     </div>
   </div>
+  <% if local_assigns.has_key? :eval %>
   <div class="card-action">
 
     <% if owner_evaluated == true %>
@@ -59,4 +63,5 @@
     <% end %>
 
   </div>
+  <% end %>
 </div>

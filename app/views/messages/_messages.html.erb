@@ -1,0 +1,40 @@
+<!-- get local vars -->
+
+<% if local_assigns.has_key? :right_messages %>
+  <% messages = right_messages %>
+<% end %>
+
+<!-- just for the label ... -->
+
+<div class="form-group">
+  <label for="InputMessage">Your messages</label>
+</div>
+
+<!-- messages -->
+
+<% messages.each do |msg| %>
+  <% @left = (msg.evaluation.user == current_account.user ? false : true) %>
+
+  <div class="row">
+    <div class="message-div">
+      <span class="<%= 'float-it' if @left %>">
+        <span class="message-text">
+          <% if @left %>"<%= msg.content %>"<% end %>
+        </span>
+
+        <% if msg.evaluation.user.user_pictures.first.present? %>
+          <%= image_tag msg.evaluation.user.user_pictures.first.file.url(:thumb), class: ["img-avatar3",('float-it' if @left)] %>
+        <% end %>
+
+        <span class="message-text">
+          <% if @left == false %>"<%= msg.content %>"<% end %>
+        </span>
+      </span>
+    </div>
+  </div>
+
+<% end %>
+
+<!-- new message --><br><br>
+
+<%= render partial: 'messages/form' %>
