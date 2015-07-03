@@ -151,13 +151,13 @@
         <!-- negative evaluation -->
 
         <div class="col-sm-6 like-it">
-        <%= link_to ("<i class='fa fa-times fa-4x' style='color: black;'></i>").html_safe,  user_building_room_evaluations_path(current_account.user, room.building, room, eval: false), method: :post %>
+        <%= link_to ("<i class='fa fa-times fa-4x' style='color: #B73126;'></i>").html_safe,  user_building_room_evaluations_path(current_account.user, room.building, room, eval: false), method: :post %>
         </div>
 
         <!-- positive evaluation -->
 
         <div class="col-sm-6 like-it">
-        <%= link_to ("<i class='fa fa-heart fa-4x' style='color: red;'></i>").html_safe,  user_building_room_evaluations_path(current_account.user, room.building, room, eval: true), method: :post %>
+        <%= link_to ("<i class='fa fa-check fa-4x' style='color: #24846C;'></i>").html_safe,  user_building_room_evaluations_path(current_account.user, room.building, room, eval: true), method: :post %>
         </div>
 
       </div>
@@ -169,10 +169,10 @@
 
     <div class="row">
       <div class="col-sm-6 like-it">
-      <%= link_to ("<i class='fa fa-heart fa-4x' style='color: gray;'></i>").html_safe, "#" %>
+      <%= link_to ("<i class='fa fa-times fa-4x' style='color: gray;'></i>").html_safe, "#" %>
       </div>
       <div class="col-sm-6 like-it">
-      <%= link_to ("<i class='fa fa-times fa-4x' style='color: gray;'></i>").html_safe, "#" %>
+      <%= link_to ("<i class='fa fa-check fa-4x' style='color: gray;'></i>").html_safe, "#" %>
       </div>
     </div>
 
